@@ -1,26 +1,58 @@
 import { Button, Input, Typography } from "@material-tailwind/react";
+import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { FcGoogle } from "react-icons/fc";
+import useAuth from "../../hooks/useAuth";
+import toast from "react-hot-toast";
 
 const SignIn = () => {
+    const { signInWithEmailAndPass, signInWithGoogle, user } = useAuth();
+    const { register, handleSubmit } = useForm();
+
+    console.log(user);
+
+    const formSubmit = async (data) => {
+        const toastId = toast.loading('Signing in user...');
+        try {
+            await signInWithEmailAndPass(data.email, data.password);
+            toast.success('User signed in', { id: toastId });
+        } catch (error) {
+            toast.error('Error signing in user.', { id: toastId });
+            console.log(error);
+        }
+    }
+
+    
+    const handleGoogleSignIn = async () => {
+        const toastId = toast.loading('Signing in user...');
+        try {
+            await signInWithGoogle()
+            toast.success('User signed in', { id: toastId });
+        } catch (error) {
+            toast.error('Error signing in user.', { id: toastId });
+            console.log(error);
+        }
+    }
     return (
         <div className="bg-[#FAFAFA]">
             <div className="flex items-center justify-center min-h-screen py-10 px-5">
                 <div className="w-[400px] mx-auto bg-white p-5 md:p-10">
                     <Typography className="text-center" variant="h3">{`We've missed you!`}</Typography>
                     <Typography className="text-center text-c-gray text-sm" variant="paragraph">Many questions are waiting for your wise suggestions!</Typography>
-                    <form className="space-y-4">
+                    <form onSubmit={handleSubmit(formSubmit)} className="space-y-4">
                         <div className="space-y-2">
                             <Typography as='label' htmlFor='email' color="blue-gray"> Your Email </Typography>
-                            <Input type="email" placeholder="user@gmail.com" id="email" className=" !border-t-blue-gray-200 focus:!border-t-gray-900" labelProps={{ className: "before:content-none after:content-none", }} />
+                            <Input {...register('email')} type="email" placeholder="user@gmail.com" id="email" className=" !border-t-blue-gray-200 focus:!border-t-gray-900" labelProps={{ className: "before:content-none after:content-none", }} />
                         </div>
                         <div className="space-y-2">
                             <Typography as='label' htmlFor='password' color="blue-gray"> Password </Typography>
-                            <Input type="password" placeholder="****" id="password" className=" !border-t-blue-gray-200 focus:!border-t-gray-900" labelProps={{ className: "before:content-none after:content-none", }} />
+                            <Input {...register('password')} type="password" placeholder="****" id="password" className=" !border-t-blue-gray-200 focus:!border-t-gray-900" labelProps={{ className: "before:content-none after:content-none", }} />
                         </div>
                         <Typography className="cursor-pointer hover:underline">Forgot Password</Typography>
                         <Button type="submit" fullWidth className="bg-primary">Sign in</Button>
                     </form>
                     <Typography className="text-center mt-5">New here?  <Link to='/signup' className="font-medium">Create a New Account</Link></Typography>
+                    <Button onClick={handleGoogleSignIn} fullWidth className="bg-primary/10 text-blue-gray-900 mt-3 shadow-none focus:shadow-none active:shadow-none hover:shadow-none flex items-center justify-center gap-3"><FcGoogle className="text-lg" />Sign with Google</Button>
                 </div>
             </div>
         </div>
