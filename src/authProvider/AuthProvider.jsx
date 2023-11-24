@@ -10,6 +10,7 @@ const googleProvider = new GoogleAuthProvider();
 const AuthProvider = ({children}) => {
     const [user, setUser] = useState();
     const [isLoading, setIsLoading] = useState(false);
+    
 
     const handleAction = (action, ...params) => {
         setIsLoading(true);
@@ -21,7 +22,7 @@ const AuthProvider = ({children}) => {
     })
 
     useEffect(() => {
-        const unSubscribe = onAuthStateChanged(auth, currentUser => {
+        const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
             if(currentUser){
                 setUser(currentUser);
                 setIsLoading(false);

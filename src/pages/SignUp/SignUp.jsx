@@ -5,12 +5,14 @@ import { fileUploader } from "../../api/fileUploader";
 import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const SignUp = () => {
     const { user, signUpWithEmailAndPass, updateUser } = useAuth();
     const { register, handleSubmit } = useForm();
     const navigate = useNavigate();
     const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
 
 
     console.log(user);
@@ -37,8 +39,8 @@ const SignUp = () => {
                 "email": user?.email,
                 "image": user?.photoURL
             }
-            const res = await axiosPublic.post('/users', signedUser);
-            console.log(res);
+            await axiosPublic.post('/users', signedUser);
+            await axiosSecure.post('/create-token', {email: user?.email});
             navigate('/');
 
         } catch (error) {

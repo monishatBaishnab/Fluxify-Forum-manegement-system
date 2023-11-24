@@ -30,6 +30,7 @@ const Navbar = () => {
                     <Link to='/signup'><Button className="bg-primary flex items-center gap-2 text-base font-normal capitalize py-2"><LuUserPlus className="text-lg" /> Join us</Button></Link>
                     <Link to='/signin'><Button className="bg-c-blue/20 text-c-blue flex items-center gap-2 text-base font-normal capitalize py-2"><AiOutlineLogin className="text-lg" /> Sign in </Button></Link>
                     <IconButton className="inline-block lg:hidden" onClick={() => setOpenDrower(!openDrower)} variant="text"><FaBars className="text-lg" /></IconButton>
+                    
                 </div>
             </div>
             <Drawer open={openDrower} onClose={closeDrawer} className="py-5" overlayProps={{ className: 'fixed' }}>

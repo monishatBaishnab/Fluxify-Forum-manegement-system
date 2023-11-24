@@ -4,12 +4,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const SignIn = () => {
     const { signInWithEmailAndPass, signInWithGoogle, user } = useAuth();
     const { register, handleSubmit } = useForm();
     const navigate = useNavigate();
+    const axiosSecure = useAxiosSecure();
     const axiosPublic = useAxiosPublic();
 
     console.log(user);
@@ -18,6 +20,7 @@ const SignIn = () => {
         const toastId = toast.loading('Signing in user...');
         try {
             await signInWithEmailAndPass(data.email, data.password);
+            await axiosSecure.post('/create-token', {email: user?.email});
             toast.success('User signed in', { id: toastId });
             navigate('/');
         } catch (error) {
@@ -37,9 +40,9 @@ const SignIn = () => {
                 "email": user?.email,
                 "image": user?.photoURL
             }
-            console.log(signedUser);
-            const res = await axiosPublic.post('/users', signedUser);
-            console.log(res);
+
+            await axiosPublic.post('/users', signedUser);
+            await axiosSecure.post('/create-token', {email: user?.email});
             navigate('/');
         } catch (error) {
             toast.error('Error signing in user.', { id: toastId });
