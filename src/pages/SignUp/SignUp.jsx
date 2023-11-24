@@ -1,14 +1,19 @@
 import { Button, Input, Typography } from "@material-tailwind/react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { fileUploader } from "../../api/fileUploader";
 import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const SignUp = () => {
-    const {user, signUpWithEmailAndPass, updateUser} = useAuth();
+    const { user, signUpWithEmailAndPass, updateUser } = useAuth();
     const { register, handleSubmit } = useForm();
+    const navigate = useNavigate();
+    const axiosPublic = useAxiosPublic();
 
+
+    console.log(user);
     const formSubmit = async (data) => {
         const toastId = toast.loading('User creating...');
         const image = data.image[0];
@@ -18,16 +23,24 @@ const SignUp = () => {
         const email = data.email;
         const password = data.password;
 
-        if(password.length < 6){
-            toast.error('Password length must be at least 6 characters.', {id: toastId})
+        if (password.length < 6) {
+            toast.error('Password length must be at least 6 characters.', { id: toastId })
             return;
         }
 
         try {
             await signUpWithEmailAndPass(email, password);
             await updateUser(name, uploadedImage);
-            toast.success("User created.", {id: toastId});
-            console.log(user);
+            toast.success("User created.", { id: toastId });
+            const signedUser = {
+                "name": user?.displayName,
+                "email": user?.email,
+                "image": user?.photoURL
+            }
+            const res = await axiosPublic.post('/users', signedUser);
+            console.log(res);
+            navigate('/');
+
         } catch (error) {
             console.log(error);
         }

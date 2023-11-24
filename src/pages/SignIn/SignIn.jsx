@@ -1,13 +1,16 @@
 import { Button, Input, Typography } from "@material-tailwind/react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const SignIn = () => {
     const { signInWithEmailAndPass, signInWithGoogle, user } = useAuth();
     const { register, handleSubmit } = useForm();
+    const navigate = useNavigate();
+    const axiosPublic = useAxiosPublic();
 
     console.log(user);
 
@@ -16,6 +19,7 @@ const SignIn = () => {
         try {
             await signInWithEmailAndPass(data.email, data.password);
             toast.success('User signed in', { id: toastId });
+            navigate('/');
         } catch (error) {
             toast.error('Error signing in user.', { id: toastId });
             console.log(error);
@@ -28,6 +32,15 @@ const SignIn = () => {
         try {
             await signInWithGoogle()
             toast.success('User signed in', { id: toastId });
+            const signedUser = {
+                "name": user?.displayName,
+                "email": user?.email,
+                "image": user?.photoURL
+            }
+            console.log(signedUser);
+            const res = await axiosPublic.post('/users', signedUser);
+            console.log(res);
+            navigate('/');
         } catch (error) {
             toast.error('Error signing in user.', { id: toastId });
             console.log(error);

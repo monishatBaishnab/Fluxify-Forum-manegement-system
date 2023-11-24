@@ -5,6 +5,7 @@ import { LuUserPlus } from "react-icons/lu";
 import { useEffect, useState } from "react";
 import { FaBars } from "react-icons/fa";
 import SidebarItems from "../Sidebar/SidebarItems";
+import { AiOutlineLogin } from "react-icons/ai";
 
 const Navbar = () => {
     const [openDrower, setOpenDrower] = useState(false);
@@ -26,8 +27,8 @@ const Navbar = () => {
                     </Typography>
                 </Link>
                 <div className="flex gap-2">
-                    <Link><Button className="bg-primary flex items-center gap-2 text-base font-normal capitalize py-2"><LuUserPlus className="text-lg" /> Join us</Button></Link>
-                    <Link><Button className="bg-c-blue/20 text-c-blue flex items-center gap-2 text-base font-normal capitalize py-2"><LuUserPlus className="text-lg" /> Sign in </Button></Link>
+                    <Link to='/signup'><Button className="bg-primary flex items-center gap-2 text-base font-normal capitalize py-2"><LuUserPlus className="text-lg" /> Join us</Button></Link>
+                    <Link to='/signin'><Button className="bg-c-blue/20 text-c-blue flex items-center gap-2 text-base font-normal capitalize py-2"><AiOutlineLogin className="text-lg" /> Sign in </Button></Link>
                     <IconButton className="inline-block lg:hidden" onClick={() => setOpenDrower(!openDrower)} variant="text"><FaBars className="text-lg" /></IconButton>
                 </div>
             </div>
