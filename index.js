@@ -12,7 +12,6 @@ app.get('/health', (req, res) => {
     res.send('Flucify server running..');
 })
 
-
 // 404 error handler middleware
 app.use(pathErrorHandler);
 // Global error handler middleware
