@@ -7,12 +7,16 @@ const MainLayout = () => {
     return (
         <div>
             <Navbar />
-            <div className="flex max-w-[1920px]">
-                <LeftSidebar />
-                <div className="flex-1 bg-[#FAFAFA]">
+            <div className="flex max-w-[1920px] ">
+                <div className="w-[280px] hidden lg:inline-block">
+                    <LeftSidebar />
+                </div>
+                <div className="flex-1 bg-[#FAFAFA] mt-[80px]">
                     <Outlet />
                 </div>
-                <RightSidebar />
+                <div className="w-[280px] hidden lg:inline-block">
+                    <RightSidebar />
+                </div>
             </div>
         </div>
     );

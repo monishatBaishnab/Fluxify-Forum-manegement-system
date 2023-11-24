@@ -21,7 +21,7 @@ const RightSidebar = () => {
 
 
     return (
-        <div className="w-[280px] hidden lg:inline-block">
+        <div className="w-[280px] mt-[80px] fixed right-0">
             <div className="">
                 <Typography className="px-4 border-b py-3 text-center font-medium">Our Tags</Typography>
                 <div className="p-5">
