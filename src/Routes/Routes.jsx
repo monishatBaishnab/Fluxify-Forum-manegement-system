@@ -4,6 +4,7 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Home from "../pages/Home/Home";
 import SignIn from "../pages/SignIn/SignIn";
 import SignUp from "../pages/SignUp/SignUp";
+import PostDetails from "../components/Home/PostDetails/PostDetails";
 
 const Routes = createBrowserRouter([
     {
@@ -14,6 +15,10 @@ const Routes = createBrowserRouter([
             {
                 index: true,
                 element: <Home />
+            },
+            {
+                path: 'posts/:id',
+                element: <PostDetails />
             }
         ]
     },

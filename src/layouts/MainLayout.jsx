@@ -11,7 +11,7 @@ const MainLayout = () => {
                 <div className="w-[280px] hidden lg:inline-block">
                     <LeftSidebar />
                 </div>
-                <div className="flex-1 bg-[#FAFAFA] mt-[80px]">
+                <div className="flex-1 bg-[#FAFAFA] mt-[82px]">
                     <Outlet />
                 </div>
                 <div className="w-[280px] hidden lg:inline-block">
