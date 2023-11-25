@@ -3,16 +3,26 @@ import PostContainer from "../../components/Home/PostContainer/PostContainer";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import LoadinPost from "../../components/Home/PostContainer/LoadinPost";
+import Pagination from "../../components/Home/PostContainer/Pagination";
+import { useState } from "react";
 
 
 const Home = () => {
     const axiosPublic = useAxiosPublic();
+    // State for the current page and items per page
+    const [page, setPage] = useState(1);
+    const offset = 5;
+
+    console.log(page);
+
+
     const getPosts = async () => {
-        const res = await axiosPublic.get('/posts');
+        const res = await axiosPublic.get(`/posts?page=${page}&offset=${offset}`);
         return res.data;
     }
 
-    const { data, isLoading } = useQuery({ queryKey: ['posts'], queryFn: getPosts });
+    const { data, isLoading } = useQuery({ queryKey: ['posts', page], queryFn: getPosts });
+
 
     return (
         <div>
@@ -35,7 +45,8 @@ const Home = () => {
                 </div>
                 {isLoading ?
                     <LoadinPost /> :
-                    <PostContainer posts={data} />}
+                    <PostContainer posts={data?.data} />}
+                <Pagination count={data?.count} setPage={setPage} offset={offset} />
             </div>
         </div>
     );

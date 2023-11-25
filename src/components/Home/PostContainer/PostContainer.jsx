@@ -9,7 +9,7 @@ const PostContainer = ({posts}) => {
             {
                 posts.map(post => <PostCard key={post._id} post={post} />)
             }
-
+            
         </div>
     );
 };

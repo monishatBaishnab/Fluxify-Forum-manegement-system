@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
-import { Button, Textarea, Typography } from "@material-tailwind/react";
+import { Button, Textarea, Typography, } from "@material-tailwind/react";
 import { getDayAgo } from "../../api/getDays";
 import PostUser from "../../components/Sheared/Post/PostUser";
 import { AiFillDislike, AiFillLike } from "react-icons/ai";
@@ -9,11 +9,13 @@ import LoadingPostDetails from "../../components/Home/PostDetails/LoadingPostDet
 import useAuth from "../../hooks/useAuth";
 import { FaShare } from "react-icons/fa";
 import toast from "react-hot-toast";
+import { useState } from "react";
 
 const PostDetails = () => {
     const axiosSecure = useAxiosSecure();
     const { id } = useParams();
     const { user: currentUser } = useAuth();
+    const [commentText, setCommentText] = useState('');
 
     const getPost = async () => {
         const res = await axiosSecure.get(`/posts/${id}`);
@@ -29,6 +31,7 @@ const PostDetails = () => {
         if (find?.length > 0) {
             return toast.error('You are alrady unliked this post.');
         }
+        
         const res = await axiosSecure.put(`/like/${_id}?user=${currentUser.email}`);
         refetch();
         if (!res?.data?.upvote) {
@@ -37,7 +40,7 @@ const PostDetails = () => {
     }
 
     const handleDownVote = async () => {
-        const find = upvote.filter(user => user === currentUser.email);
+        const find = downvote.filter(user => user === currentUser.email);
         if (find?.length > 0) {
             return toast.error('You are alrady unliked this post.');
         }
@@ -46,6 +49,19 @@ const PostDetails = () => {
         if (!res?.data?.downvote) {
             toast.error('You are alrady unliked this post.');
         }
+    }
+
+    const handleComment = async () => {
+        const fetchUserId = await axiosSecure.get('/users/baishnabmonishat@gmail.com');
+        const userId = fetchUserId?.data?._id;
+        // console.log(fetchUserId);
+        const userComment = {
+            "comment": commentText,
+            "user": userId,
+            "post": _id
+        }
+        const res = await axiosSecure.post('/comments', userComment);
+        console.log(res.data);
     }
 
     return (
@@ -74,8 +90,8 @@ const PostDetails = () => {
                     </div>
                     <div className="space-y-3">
                         <Typography variant="h5" className="font-medium text-blue-gray-700">Share Your Thoughts on Forum Posts!</Typography>
-                        <Textarea className=" !border-t-blue-gray-200 focus:!border-blue-gray-700 focus:!border-t-blue-gray-700" labelProps={{ className: "before:content-none after:content-none", }} />
-                        <Button color="blue">Post</Button>
+                        <Textarea onChange={(e) => setCommentText(e.target.value)} className=" !border-t-blue-gray-200 focus:!border-blue-gray-700 focus:!border-t-blue-gray-700" labelProps={{ className: "before:content-none after:content-none", }} />
+                        <Button onClick={handleComment} color="blue">Post</Button>
                     </div>
                 </div>}
         </div>
