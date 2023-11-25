@@ -4,7 +4,7 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Home from "../pages/Home/Home";
 import SignIn from "../pages/SignIn/SignIn";
 import SignUp from "../pages/SignUp/SignUp";
-import PostDetails from "../components/Home/PostDetails/PostDetails";
+import PostDetails from "../pages/PostDetails/PostDetails";
 
 const Routes = createBrowserRouter([
     {

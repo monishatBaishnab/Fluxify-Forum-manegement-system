@@ -3,17 +3,12 @@ import { AiFillDislike, AiFillLike } from "react-icons/ai";
 // import { FaRegComments } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
+import { getDayAgo } from "../../../api/getDays";
+import PostUser from "../../Sheared/Post/PostUser";
 
 const PostCard = ({post}) => {
     const {_id, title, tags, upvote, downvote, user, time, image} = post || {};
-    const getDayAgo = (targetDate) => {
-        const currentDate = new Date();
-        const targetDateTime = new Date(targetDate).getTime();
-        const currentDateTime = currentDate.getTime();
-        const deff = currentDateTime - targetDateTime;
-        const deffDays = Math.floor(deff / (24 * 60 * 60 * 1000));
-        return deffDays;
-    }
+    
     const deffDay = getDayAgo(time);
 
     return (
@@ -30,15 +25,7 @@ const PostCard = ({post}) => {
                         </div>
                     </div>
                     <div className="flex items-end md:justify-between flex-wrap gap-2">
-                        <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-full overflow-hidden">
-                                <img className="h-full w-full object-cover" src={user.image} alt={user.name} />
-                            </div>
-                            <div>
-                                <Typography variant="h6" className="font-medium whitespace-nowrap">{user.name}</Typography>
-                                <Typography as='span' className="text-sm text-c-gray">{deffDay > 0 ? `${deffDay} days ago` : 'Today'} </Typography>
-                            </div>
-                        </div>
+                        <PostUser user={user} deffDay={deffDay} />
                         <div className="flex gap-4 flex-wrap">
                             {/* <Typography as='span' className="flex items-center gap-2 text-[#808080]"><FaRegComments /> {comment}</Typography> */}
                             <Typography as='span' className="flex items-center gap-2 text-[#808080]"><AiFillLike /> {upvote}</Typography>
