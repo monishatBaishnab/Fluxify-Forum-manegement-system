@@ -10,6 +10,10 @@ const postSchema = new Schema({
         type: String,
         required: true
     },
+    image: {
+        type: String,
+        required: true
+    },
     tags: {
         type: [String],
         required: true
