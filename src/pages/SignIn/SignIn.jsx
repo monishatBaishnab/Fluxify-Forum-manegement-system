@@ -1,6 +1,6 @@
 import { Button, Input, Typography } from "@material-tailwind/react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
@@ -13,8 +13,8 @@ const SignIn = () => {
     const navigate = useNavigate();
     const axiosSecure = useAxiosSecure();
     const axiosPublic = useAxiosPublic();
-
-    console.log(user);
+    const location = useLocation();
+    const navigateLocation = location?.state?.from ? location?.state?.from : '/';
 
     const formSubmit = async (data) => {
         const toastId = toast.loading('Signing in user...');
@@ -22,7 +22,7 @@ const SignIn = () => {
             await signInWithEmailAndPass(data.email, data.password);
             await axiosSecure.post('/create-token', {email: user?.email});
             toast.success('User signed in', { id: toastId });
-            navigate('/');
+            navigate(navigateLocation);
         } catch (error) {
             toast.error('Error signing in user.', { id: toastId });
             console.log(error);
@@ -43,7 +43,7 @@ const SignIn = () => {
 
             await axiosPublic.post('/users', signedUser);
             await axiosSecure.post('/create-token', {email: user?.email});
-            navigate('/');
+            navigate(navigateLocation);
         } catch (error) {
             toast.error('Error signing in user.', { id: toastId });
             console.log(error);

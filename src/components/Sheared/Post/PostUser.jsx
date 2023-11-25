@@ -17,7 +17,7 @@ const PostUser = ({user, deffDay}) => {
 
 PostUser.propTypes = {
     user: PropTypes.object,
-    deffDay: PropTypes.string,
+    deffDay: PropTypes.number,
 }
 
 export default PostUser;

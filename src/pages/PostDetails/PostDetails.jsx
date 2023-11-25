@@ -16,11 +16,10 @@ const PostDetails = () => {
         return res.data;
     }
 
+    
     const { data: post, isLoading } = useQuery({ queryKey: ['post'], queryFn: getPost });
     const { title, description, tags, upvote, downvote, user, time, image } = post || {};
-    // if (!isLoading) {
-    //     console.log(title);
-    // }
+    
     const deffDay = getDayAgo(time);
 
     return (

@@ -14,10 +14,6 @@ const Home = () => {
 
     const { data, isLoading } = useQuery({ queryKey: ['posts'], queryFn: getPosts });
 
-    if (!isLoading) {
-        console.log(data);
-    }
-
     return (
         <div>
             <div className="container py-10">

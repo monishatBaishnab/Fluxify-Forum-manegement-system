@@ -5,6 +5,7 @@ import Home from "../pages/Home/Home";
 import SignIn from "../pages/SignIn/SignIn";
 import SignUp from "../pages/SignUp/SignUp";
 import PostDetails from "../pages/PostDetails/PostDetails";
+import PrivateRoute from "./PrivateRoute";
 
 const Routes = createBrowserRouter([
     {
@@ -18,7 +19,7 @@ const Routes = createBrowserRouter([
             },
             {
                 path: 'posts/:id',
-                element: <PostDetails />
+                element: <PrivateRoute><PostDetails /></PrivateRoute>
             }
         ]
     },
