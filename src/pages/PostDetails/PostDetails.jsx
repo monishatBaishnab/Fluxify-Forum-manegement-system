@@ -6,21 +6,47 @@ import { getDayAgo } from "../../api/getDays";
 import PostUser from "../../components/Sheared/Post/PostUser";
 import { AiFillDislike, AiFillLike } from "react-icons/ai";
 import LoadingPostDetails from "../../components/Home/PostDetails/LoadingPostDetails";
+import useAuth from "../../hooks/useAuth";
+import { FaShare } from "react-icons/fa";
+import toast from "react-hot-toast";
 
 const PostDetails = () => {
     const axiosSecure = useAxiosSecure();
     const { id } = useParams();
+    const { user: currentUser } = useAuth();
 
     const getPost = async () => {
         const res = await axiosSecure.get(`/posts/${id}`);
         return res.data;
     }
+    const { data: post, isLoading, refetch } = useQuery({ queryKey: ['post'], queryFn: getPost });
 
-    
-    const { data: post, isLoading } = useQuery({ queryKey: ['post'], queryFn: getPost });
-    const { title, description, tags, upvote, downvote, user, time, image } = post || {};
-    
+    const { _id, title, description, tags, upvote, downvote, user, time, image } = post || {};
     const deffDay = getDayAgo(time);
+
+    const handleUpVote = async () => {
+        const find = upvote.filter(user => user === currentUser.email);
+        if (find?.length > 0) {
+            return toast.error('You are alrady unliked this post.');
+        }
+        const res = await axiosSecure.put(`/like/${_id}?user=${currentUser.email}`);
+        refetch();
+        if (!res?.data?.upvote) {
+            toast.error('You are alrady liked this post.');
+        }
+    }
+
+    const handleDownVote = async () => {
+        const find = upvote.filter(user => user === currentUser.email);
+        if (find?.length > 0) {
+            return toast.error('You are alrady unliked this post.');
+        }
+        const res = await axiosSecure.put(`/unlike/${_id}?user=${currentUser.email}`);
+        refetch();
+        if (!res?.data?.downvote) {
+            toast.error('You are alrady unliked this post.');
+        }
+    }
 
     return (
         <div className="container py-10 min-h-[calc(100vh_-_82px)]">
@@ -32,7 +58,7 @@ const PostDetails = () => {
                     </div>
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2 my-2">
-                            {tags.map(tag => <Typography key={tag} className="px-2 bg-[#EAEAEA] rounded-sm text-[#808080]" as='span'>{tag}</Typography>)}
+                            {tags?.map(tag => <Typography key={tag} className="px-2 bg-[#EAEAEA] rounded-sm text-[#808080]" as='span'>{tag}</Typography>)}
                         </div>
                         <Typography as='span' className="text-sm font-normal text-c-gray">{deffDay > 0 ? `${deffDay} days ago` : 'Today'} </Typography>
                     </div>
@@ -41,8 +67,9 @@ const PostDetails = () => {
                         <PostUser user={user} deffDay={deffDay} />
                         <div className="flex gap-4 flex-wrap">
                             {/* <Typography as='span' className="flex items-center gap-2 text-[#808080]"><FaRegComments /> {comment}</Typography> */}
-                            <Typography as='span' className="flex items-center gap-2 text-[#808080]"><button className="p-2 hover:text-light-blue-500 transition-all"><AiFillLike className="text-xl" /></button> {upvote}</Typography>
-                            <Typography as='span' className="flex items-center gap-2 text-[#808080]"><button className="p-2 hover:text-light-blue-500 transition-all"><AiFillDislike className="text-xl" /></button> {downvote}</Typography>
+                            <Button onClick={handleUpVote} color="blue" size="sm" className="flex items-center gap-2"><AiFillLike className="text-xl" />{upvote?.length > 0 ? upvote?.length : ''}</Button>
+                            <Button onClick={handleDownVote} color="amber" size="sm" className="flex items-center gap-2"><AiFillDislike className="text-xl" />{downvote?.length > 0 ? downvote?.length : ''}</Button>
+                            <Button color="green" size="sm" className="flex items-center gap-2"><FaShare className="text-xl" /></Button>
                         </div>
                     </div>
                     <div className="space-y-3">

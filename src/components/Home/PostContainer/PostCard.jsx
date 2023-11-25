@@ -28,8 +28,8 @@ const PostCard = ({post}) => {
                         <PostUser user={user} deffDay={deffDay} />
                         <div className="flex gap-4 flex-wrap">
                             {/* <Typography as='span' className="flex items-center gap-2 text-[#808080]"><FaRegComments /> {comment}</Typography> */}
-                            <Typography as='span' className="flex items-center gap-2 text-[#808080]"><AiFillLike /> {upvote}</Typography>
-                            <Typography as='span' className="flex items-center gap-2 text-[#808080]"><AiFillDislike /> {downvote}</Typography>
+                            <Typography as='span' className="flex items-center gap-2 text-[#808080]"><AiFillLike /> {upvote?.length > 0 ? upvote?.length : ''}</Typography>
+                            <Typography as='span' className="flex items-center gap-2 text-[#808080]"><AiFillDislike /> {downvote?.length > 0 ? downvote?.length : ''}</Typography>
                         </div>
                     </div>
                 </div>

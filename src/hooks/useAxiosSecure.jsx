@@ -6,7 +6,7 @@ const instance = axios.create({
     withCredentials: true
 })
 const useAxiosSecure = () => {
-    const { user, signOutUser } = useAuth();
+    const { user, signOutUser } = useAuth() || {};
     if (user) {
         instance.interceptors.response.use(config => {
             return config;
