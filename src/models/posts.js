@@ -23,12 +23,12 @@ const postSchema = new Schema({
         default: Date.now
     },
     upvote: {
-        type: Number,
-        default: 0
+        type: Array,
+        default: []
     },
     downvote: {
-        type: Number,
-        default: 0
+        type: Array,
+        default: []
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,

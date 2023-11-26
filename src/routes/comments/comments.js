@@ -1,4 +1,5 @@
 const { findAll, findOne, updateOne, insertOne } = require('../../api/comments');
+const verifyUser = require('../../middlewares/verifyUser');
 
 
 const router = require('express').Router();
@@ -14,10 +15,10 @@ const router = require('express').Router();
 
 router.get('/comments', findAll);
 
-router.get('/comments/:id', findOne);
+router.get('/comments/:id',verifyUser, findOne);
 
-router.put('/comments/:id', updateOne)
+router.put('/comments/:id',verifyUser, updateOne)
 
-router.post('/comments', insertOne);
+router.post('/comments',verifyUser, insertOne);
 
 module.exports = router;

@@ -12,9 +12,10 @@ router.get('/posts/:id', verifyUser, findOne);
 
 router.post('/posts', insertOne);
 
-router.put('/posts/:id/upvote', updateUpvote);
+// router.put('/posts/:id/upvote', verifyUser, updateUpvote);
+router.put('/like/:id', verifyUser, updateUpvote);
 
-router.put('/posts/:id/downvote', updateDownvote);
+router.put('/unlike/:id', verifyUser, updateDownvote);
 
 router.delete('/posts/:id', deleteOne);
 
