@@ -1,5 +1,6 @@
 import { List, Typography } from "@material-tailwind/react";
-import SidebarItems from "./SidebarItems";
+import SidebarItems from "../SidebarItems/SidebarItems";
+import { usersItems } from "../../../api/sidebarLists";
 
 const LeftSidebar = () => {
     return (
@@ -7,7 +8,7 @@ const LeftSidebar = () => {
             <div>
                 <Typography className="px-4 border-b py-3 text-center font-medium">Menu</Typography>
                 <List className="p-0">
-                    <SidebarItems />
+                    <SidebarItems items={usersItems} />
                 </List>
             </div>
         </div>

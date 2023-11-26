@@ -17,3 +17,21 @@ const postTags = [
     'SportsTalk',
 ];
 export default postTags;
+
+export const tagOptions = [
+    {value: 'innovation', label: 'Innovation'},
+    {value: 'coding', label: 'Coding'},
+    {value: 'artificialintelligence', label: 'ArtificialIntelligence'},
+    {value: 'healthandwellness', label: 'HealthAndWellness'},
+    {value: 'adventure', label: 'Adventure'},
+    {value: 'bookrecommendation', label: 'BookRecommendation'},
+    {value: 'digitalart', label: 'DigitalArt'},
+    {value: 'gamingcommunity', label: 'GamingCommunity'},
+    {value: 'moviereview', label: 'MovieReview'},
+    {value: 'foodielife', label: 'FoodieLife'},
+    {value: 'onlinelearning', label: 'OnlineLearning'},
+    {value: 'socialjustice', label: 'SocialJustice'},
+    {value: 'musiclovers', label: 'MusicLovers'},
+    {value: 'fashioninspiration', label: 'FashionInspiration'},
+    {value: 'sportstalk', label: 'SportsTalk'},
+];

@@ -4,10 +4,11 @@ import logo from '../../../assets/fluxify.png'
 import { LuUserPlus } from "react-icons/lu";
 import { useEffect, useState } from "react";
 import { FaBars } from "react-icons/fa";
-import SidebarItems from "../Sidebar/SidebarItems";
 import { AiOutlineLogin } from "react-icons/ai";
 import Profile from "./Profile";
 import useAuth from "../../../hooks/useAuth";
+import SidebarItems from "../SidebarItems/SidebarItems";
+import { usersItems } from "../../../api/sidebarLists";
 
 const Navbar = () => {
     const [openDrower, setOpenDrower] = useState(false);
@@ -42,7 +43,7 @@ const Navbar = () => {
             </div>
             <Drawer open={openDrower} onClose={closeDrawer} className="py-5" overlayProps={{ className: 'fixed' }}>
                 <List className="p-0">
-                    <SidebarItems />
+                    <SidebarItems items={usersItems} />
                 </List>
             </Drawer>
         </div>

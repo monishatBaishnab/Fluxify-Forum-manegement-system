@@ -7,7 +7,7 @@ const MainLayout = () => {
     return (
         <div>
             <Navbar />
-            <div className="flex max-w-[1920px] ">
+            <div className="flex max-w-[1920px] mx-auto">
                 <div className="w-[280px] hidden lg:inline-block">
                     <LeftSidebar />
                 </div>

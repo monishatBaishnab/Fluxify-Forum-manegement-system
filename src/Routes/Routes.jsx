@@ -6,6 +6,10 @@ import SignIn from "../pages/SignIn/SignIn";
 import SignUp from "../pages/SignUp/SignUp";
 import PostDetails from "../pages/PostDetails/PostDetails";
 import PrivateRoute from "./PrivateRoute";
+import Dashboard from "../layouts/Dashboard";
+import UserHome from "../pages/Dashboard/User/UserHome";
+import AdminHome from "../pages/Dashboard/Admin/AdminHome";
+import AddPost from "../pages/Dashboard/User/AddPost";
 
 const Routes = createBrowserRouter([
     {
@@ -30,6 +34,24 @@ const Routes = createBrowserRouter([
     {
         path: '/signup',
         element: <SignUp />
+    },
+    {
+        path: '/dashboard',
+        element: <Dashboard />,
+        children: [
+            {
+                path: 'user-profile',
+                element: <UserHome />
+            },
+            {
+                path: 'add-post',
+                element: <AddPost />
+            },
+            {
+                path: 'admin-home',
+                element: <AdminHome />
+            }
+        ]
     }
 ])
 

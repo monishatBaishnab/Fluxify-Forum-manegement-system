@@ -29,6 +29,7 @@ const Home = () => {
         if (tag === "All") {
             return setSearchTag(undefined);
         }
+        setPage(1);
         setSearchTag(tag);
     }
     return (
