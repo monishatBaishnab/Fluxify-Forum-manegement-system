@@ -35,10 +35,11 @@ const SignUp = () => {
             await updateUser(name, uploadedImage);
             toast.success("User created.", { id: toastId });
             const signedUser = {
-                "name": user?.displayName,
-                "email": user?.email,
-                "image": user?.photoURL
+                name: user?.displayName,
+                email: user?.email,
+                image: user?.photoURL
             }
+            console.log(signedUser);
             await axiosPublic.post('/users', signedUser);
             await axiosSecure.post('/create-token', {email: user?.email});
             navigate('/');

@@ -1,19 +1,12 @@
 import { useParams } from "react-router-dom";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { useQuery } from "@tanstack/react-query";
 import LoadingPostDetails from "../../components/Home/PostDetails/LoadingPostDetails";
 import Details from "../../components/Home/PostDetails/Details";
 import Comments from "../../components/Home/PostDetails/Comments";
+import useFetchPost from "../../hooks/useFetchPost";
 
 const PostDetails = () => {
-    const axiosSecure = useAxiosSecure();
     const { id } = useParams();
-    const getPost = async () => {
-        const res = await axiosSecure.get(`/posts/${id}`);
-        return res.data;
-    }
-    const { data: post, isLoading, refetch } = useQuery({ queryKey: ['post'], queryFn: getPost });
-
+    const { post, isLoading, refetch } = useFetchPost(id);
 
 
     return (
@@ -21,10 +14,12 @@ const PostDetails = () => {
             {
                 isLoading ? <LoadingPostDetails />
                     :
-                    <Details post={post} refetch={refetch} />
+                    <div>
+                        <Details post={post} refetch={refetch} />
+                        <Comments postId={post?._id} />
+                    </div>
             }
 
-            <Comments postId={post?._id} />
         </div>
     );
 };

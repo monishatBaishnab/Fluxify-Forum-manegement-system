@@ -19,7 +19,7 @@ const Details = ({ post, refetch }) => {
     const handleUpVote = async () => {
         const find = upvote.filter(user => user === currentUser.email);
         if (find?.length > 0) {
-            return toast.error('You are alrady unliked this post.');
+            return toast.error('You are alrady liked this post.');
         }
 
         const res = await axiosSecure.put(`/like/${_id}?user=${currentUser.email}`);

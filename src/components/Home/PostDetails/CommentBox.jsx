@@ -2,13 +2,15 @@ import { Button, Textarea, Typography } from "@material-tailwind/react";
 import { useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import PropTypes from 'prop-types';
+import useAuth from "../../../hooks/useAuth";
 
 const CommentBox = ({postId, refetch}) => {
     const [commentText, setCommentText] = useState('');
     const axiosSecure = useAxiosSecure();
+    const {user} = useAuth();
 
     const handleComment = async () => {
-        const fetchUserId = await axiosSecure.get('/users/baishnabmonishat@gmail.com');
+        const fetchUserId = await axiosSecure.get(`/users/${user?.email}`);
         const userId = fetchUserId?.data?._id;
         const userComment = {
             "comment": commentText,

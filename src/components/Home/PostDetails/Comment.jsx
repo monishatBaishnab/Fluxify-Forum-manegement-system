@@ -12,7 +12,7 @@ const Comment = ({comment}) => {
 };
 
 Comment.propTypes = {
-    comment: PropTypes.string,
+    comment: PropTypes.object,
 }
 
 export default Comment;

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 const Pagination = ({ setPage, offset, count = 1 }) => {
     const [active, setActive] = useState(1);
-
+    
     useEffect(() => {
         setPage(active);
     }, [active, setPage]);

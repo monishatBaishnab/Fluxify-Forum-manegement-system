@@ -20,7 +20,7 @@ const PostCard = ({post}) => {
                 <div className="flex flex-col justify-between">
                     <div className="mb-3">
                         <Link to={`/posts/${_id}`}><Typography variant="h5" className="font-medium transition-all hover:text-primary">{title.length > 45 ? title.slice(0, 45) : title }</Typography></Link>
-                        <div className="flex items-center gap-2 my-2">
+                        <div className="flex items-center gap-2 flex-wrap my-2">
                             {tags.map(tag => <Typography key={tag} className="px-2 bg-[#EAEAEA] rounded-sm text-[#808080]" as='span'>{tag}</Typography>)}
                         </div>
                     </div>
