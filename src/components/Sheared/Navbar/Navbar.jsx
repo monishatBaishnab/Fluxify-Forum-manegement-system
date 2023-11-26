@@ -33,8 +33,8 @@ const Navbar = () => {
                 <div className="flex gap-2">
                     {user === null ?
                         <div className="flex items-center gap-2">
-                            <Link to='/signup'><Button className="bg-primary flex items-center gap-2 text-base font-normal capitalize py-2"><LuUserPlus className="text-lg" /> Join us</Button></Link>
-                            <Link to='/signin'><Button className="bg-c-blue/20 text-c-blue flex items-center gap-2 text-base font-normal capitalize py-2"><AiOutlineLogin className="text-lg" /> Sign in </Button></Link>
+                            <Link to='/signin'><Button className="bg-primary flex items-center gap-2 text-base font-normal capitalize py-2"><LuUserPlus className="text-lg" /> Join us</Button></Link>
+                            <Link to='/signup'><Button className="bg-c-blue/20 text-c-blue flex items-center gap-2 text-base font-normal capitalize py-2"><AiOutlineLogin className="text-lg" /> Sign up </Button></Link>
                         </div>
                         :
                         <Profile />}

@@ -10,6 +10,8 @@ import Dashboard from "../layouts/Dashboard";
 import UserHome from "../pages/Dashboard/User/UserHome";
 import AdminHome from "../pages/Dashboard/Admin/AdminHome";
 import AddPost from "../pages/Dashboard/User/AddPost";
+import MyPosts from "../pages/Dashboard/User/MyPosts";
+import Comments from "../pages/Dashboard/User/Comments";
 
 const Routes = createBrowserRouter([
     {
@@ -37,7 +39,7 @@ const Routes = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        element: <Dashboard />,
+        element: <PrivateRoute><Dashboard /></PrivateRoute>,
         children: [
             {
                 path: 'user-profile',
@@ -46,6 +48,14 @@ const Routes = createBrowserRouter([
             {
                 path: 'add-post',
                 element: <AddPost />
+            },
+            {
+                path: 'my-post',
+                element: <MyPosts />
+            },
+            {
+                path: 'comments/:id',
+                element: <Comments />
             },
             {
                 path: 'admin-home',

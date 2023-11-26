@@ -6,9 +6,10 @@ import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { FcGoogle } from "react-icons/fc";
 
 const SignUp = () => {
-    const { user, signUpWithEmailAndPass, updateUser } = useAuth();
+    const { user, signUpWithEmailAndPass, updateUser, signInWithGoogle } = useAuth();
     const { register, handleSubmit } = useForm();
     const navigate = useNavigate();
     const axiosPublic = useAxiosPublic();
@@ -49,6 +50,25 @@ const SignUp = () => {
         }
 
     }
+    const handleGoogleSignIn = async () => {
+        const toastId = toast.loading('Signing in user...');
+        try {
+            await signInWithGoogle()
+            toast.success('User signed in', { id: toastId });
+            const signedUser = {
+                "name": user?.displayName,
+                "email": user?.email,
+                "image": user?.photoURL
+            }
+
+            await axiosPublic.post('/users', signedUser);
+            await axiosSecure.post('/create-token', {email: user?.email});
+            navigate('/');
+        } catch (error) {
+            toast.error('Error signing in user.', { id: toastId });
+            console.log(error);
+        }
+    }
     return (
         <div className="bg-[#FAFAFA]">
             <div className="flex items-center justify-center min-h-screen py-10 px-5">
@@ -73,7 +93,7 @@ const SignUp = () => {
                         </div>
                         <Button type="submit" fullWidth className="bg-primary">Sign up</Button>
                     </form>
-                    <Typography className="text-center mt-5">Already registered? <Link to='/signin' className="font-medium">Go to sing in</Link></Typography>
+                    <Typography className="text-center mt-5">Already registered? <Link to='/signin' className="font-medium">Go to sing in</Link></Typography><Button onClick={handleGoogleSignIn} fullWidth className="bg-primary/10 text-blue-gray-900 mt-3 shadow-none focus:shadow-none active:shadow-none hover:shadow-none flex items-center justify-center gap-3"><FcGoogle className="text-lg" />Sign with Google</Button>
                 </div>
             </div>
         </div>
