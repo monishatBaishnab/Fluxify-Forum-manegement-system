@@ -15,8 +15,6 @@ const SignUp = () => {
     const axiosPublic = useAxiosPublic();
     const axiosSecure = useAxiosSecure();
 
-
-    console.log(user);
     const formSubmit = async (data) => {
         const toastId = toast.loading('User creating...');
         const image = data.image[0];
@@ -34,17 +32,15 @@ const SignUp = () => {
         try {
             await signUpWithEmailAndPass(email, password);
             await updateUser(name, uploadedImage);
-            toast.success("User created.", { id: toastId });
             const signedUser = {
-                name: user?.displayName,
-                email: user?.email,
-                image: user?.photoURL
+                name,
+                email,
+                image: uploadedImage
             }
-            console.log(signedUser);
             await axiosPublic.post('/users', signedUser);
-            await axiosSecure.post('/create-token', {email: user?.email});
+            await axiosSecure.post('/create-token', { email });
+            toast.success("User created.", { id: toastId });
             navigate('/');
-
         } catch (error) {
             console.log(error);
         }
@@ -62,7 +58,7 @@ const SignUp = () => {
             }
 
             await axiosPublic.post('/users', signedUser);
-            await axiosSecure.post('/create-token', {email: user?.email});
+            await axiosSecure.post('/create-token', { email: user?.email });
             navigate('/');
         } catch (error) {
             toast.error('Error signing in user.', { id: toastId });

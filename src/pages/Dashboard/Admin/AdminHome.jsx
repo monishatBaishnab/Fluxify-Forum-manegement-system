@@ -1,9 +1,10 @@
+import DashboardContainer from "../../../components/Sheared/Dashboard/DashboardContainer/DashboardContainer";
 
 const AdminHome = () => {
     return (
-        <div>
-            
-        </div>
+        <DashboardContainer title='Admin Profile'>
+
+        </DashboardContainer>
     );
 };
 

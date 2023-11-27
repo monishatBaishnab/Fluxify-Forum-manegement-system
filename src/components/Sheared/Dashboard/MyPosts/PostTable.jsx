@@ -63,7 +63,6 @@ const PostTable = ({ data, refetch }) => {
                                         className="font-normal text-center"
                                     >
                                         {post?.title?.length > 45 ? post?.title.slice(0, 45) + '...' : post?.title}
-
                                     </Typography>
                                 </td>
                                 <td className={classes}>
@@ -85,14 +84,10 @@ const PostTable = ({ data, refetch }) => {
                                     </Typography>
                                 </td>
                                 <td className={classes}>
-                                    <Typography
-                                        variant="small"
-                                        color="blue-gray"
-                                        className="font-normal text-center flex items-center justify-center gap-2"
-                                    >
+                                    <div className="flex gap-2 justify-center">
                                         <IconButton onClick={() => handleDelete(post?._id)} color="red"> <FaTrash className="text-lg" /> </IconButton>
                                         <Link to={`/dashboard/comments/${post?._id}`}><IconButton color="green"> <FaComments className="text-lg" /> </IconButton></Link>
-                                    </Typography>
+                                    </div>
                                 </td>
                             </tr>
                         )

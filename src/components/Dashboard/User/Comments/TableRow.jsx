@@ -11,7 +11,7 @@ const TableRow = ({ comment, isLast, refetch }) => {
     const [feedback, setFeedback] = useState(null);
 
     const handleFeedback = async () => {
-        const res = await axiosSecure.patch(`/comments/${comment?._id}`, { feedback })
+        const res = await axiosSecure.patch(`/comments/${comment?._id}`, { feedback, report: true })
         console.log(res);
         setFeedback(null);
         refetch();
@@ -32,13 +32,9 @@ const TableRow = ({ comment, isLast, refetch }) => {
                     </Typography>
                 </td>
                 <td className={classes}>
-                    <Typography
-                        variant="small"
-                        color="blue-gray"
-                        className="font-normal text-center"
-                    >
+                    <div className="flex justify-center">
                         <IconButton onClick={handleOpen} color="blue"><FaEye className="text-xl" /></IconButton>
-                    </Typography>
+                    </div>
                 </td>
                 <td className={classes}>
                     <div className="flex justify-center">
@@ -46,9 +42,9 @@ const TableRow = ({ comment, isLast, refetch }) => {
                             comment?.feedback === null ?
                                 <div className="w-[150px]">
                                     <Select onChange={(val) => setFeedback(val)} label="Feedback" containerProps={{ className: '!min-w-[150px]' }}>
-                                        <Option value="Awesome!">Awesome!</Option>
-                                        <Option value="More Details?">More Details?</Option>
-                                        <Option value="Inspiring!">Inspiring!</Option>
+                                        <Option value="Satisfactory">Satisfactory</Option>
+                                        <Option value="Improvement">Improvement</Option>
+                                        <Option value="Exceptional">Exceptional</Option>
                                     </Select>
                                 </div> :
                                 comment?.feedback

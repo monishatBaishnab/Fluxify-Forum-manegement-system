@@ -1,16 +1,22 @@
 import { Avatar, Button, Menu, MenuHandler, MenuItem, MenuList, Typography } from "@material-tailwind/react";
 import { useState } from "react";
 import { RxDashboard } from "react-icons/rx";
-import { FaRegUser } from "react-icons/fa";
 import { PiSignOutBold } from "react-icons/pi";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { Link } from "react-router-dom";
+import useFetchUser from "../../../hooks/useFetchUser";
 const Profile = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { user, signOutUser } = useAuth();
     const axiosSecure = useAxiosSecure();
+    const {data: currentUser} = useFetchUser();
 
+    let navigateLocation = '/dashboard/user-profile';
+    if(currentUser?.role == 'admin'){
+        navigateLocation = '/dashboard/admin-profile';
+    }
+    
     const handleClick = async () => {
         setIsMenuOpen(false);
         await signOutUser();
@@ -36,7 +42,7 @@ const Profile = () => {
                     </Button>
                 </MenuHandler>
                 <MenuList className="p-1">
-                    <Link to='/dashboard/user-profile'>
+                    <Link to={navigateLocation}>
                         <MenuItem>
                             <Typography
                                 as="span"
@@ -45,18 +51,6 @@ const Profile = () => {
                                 color="inherit"
                             >
                                 <RxDashboard className="text-base" /> Dashboard
-                            </Typography>
-                        </MenuItem>
-                    </Link>
-                    <Link to='/dashboard/user-profile'>
-                        <MenuItem>
-                            <Typography
-                                as="span"
-                                variant="small"
-                                className="font-normal flex items-center gap-2"
-                                color="inherit"
-                            >
-                                <FaRegUser className="text-base" /> Profile
                             </Typography>
                         </MenuItem>
                     </Link>
@@ -76,10 +70,5 @@ const Profile = () => {
         </div>
     );
 };
-
-// className={`flex items-center gap-2 rounded ${isLastItem
-//     ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
-//     : ""
-// }`}
 
 export default Profile;

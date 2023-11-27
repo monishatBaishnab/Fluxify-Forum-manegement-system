@@ -13,7 +13,7 @@ const Comments = ({  postId }) => {
         const res = axiosSecure.get(`/comments?postId=${postId}`);
         return res;
     }
-    const { data, isLoading, refetch} = useQuery({ queryKey: ['comments'], queryFn: getComments });
+    const { data, isLoading, refetch} = useQuery({ queryKey: ['comments', postId], queryFn: getComments });
 
     return (
         <div className="mt-5 p-5 bg-white">

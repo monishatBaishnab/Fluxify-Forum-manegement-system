@@ -1,5 +1,7 @@
-import { FaHome, FaList, FaRegUser, FaUsersCog } from "react-icons/fa";
+import { FaHome, FaList, FaRegUser, FaUserShield, FaUsersCog } from "react-icons/fa";
 import { MdLibraryAdd } from "react-icons/md";
+import { BiSolidCommentError } from "react-icons/bi";
+import { GrAnnounce } from "react-icons/gr";
 
 export const usersItems = [
     {
@@ -35,6 +37,33 @@ export const usersDashboardItems = [
         level: 'My Post',
         icon: FaList,
         path: '/dashboard/my-post'
+    }
+]
+
+export const adminDashboardItems = [
+    {
+        id: '1',
+        level: 'Admin Profile',
+        icon: FaUserShield,
+        path: '/dashboard/admin-profile'
+    },
+    {
+        id: '2',
+        level: 'Manage Users',
+        icon: FaUsersCog,
+        path: '/dashboard/manage-users'
+    },
+    {
+        id: '3',
+        level: 'Reported Comments',
+        icon: BiSolidCommentError,
+        path: '/dashboard/reported-comments'
+    },
+    {
+        id: '4',
+        level: '. Make Announcement',
+        icon: GrAnnounce,
+        path: '/dashboard/announcement'
     }
 ]
 

@@ -6,10 +6,13 @@ import { useRef, useState } from "react";
 import useFetchAllPost from "../../hooks/useFetchAllPost";
 import postTags from "../../api/postTags";
 import empty from '../../assets/empty.svg'
+import Announcements from "../../components/Home/Announcements/Announcements";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
 
 
 const Home = () => {
-    // State for the current page and items per page
+    const axiosSecure = useAxiosSecure();
     const [page, setPage] = useState(1);
     const offset = 5;
     const tagRef = useRef(undefined);
@@ -32,9 +35,18 @@ const Home = () => {
         setPage(1);
         setSearchTag(tag);
     }
+
+    const getAnnouncements = async() => {
+        const res = await axiosSecure.get('/annoucements');
+        return res.data;
+    }
+
+    const {data: annoucements, isLoading: annoucementsLoading} = useQuery({queryKey: ['announcements'], queryFn: getAnnouncements});
+    
     return (
         <div className="overflow-hidden">
             <div className="container py-10">
+                {!annoucementsLoading && annoucements?.length > 0 && <Announcements announcements={annoucements}  />}
                 <div className="bg-white rounded-lg p-4">
                     <Typography variant="h5" className="font-medium text-c-gray mb-3">Search Post</Typography>
                     <div className="flex gap-2 items-center">
