@@ -2,8 +2,8 @@ import { Typography } from "@material-tailwind/react";
 import PropTypes from 'prop-types';
 import TableRow from "./TableRow";
 
-const CommentTable = ({ data }) => {
-    const TABLE_HEAD = ["Title", "Full Comment", "Action"];
+const CommentTable = ({ data, refetch }) => {
+    const TABLE_HEAD = ["Title", "Full Comment", "Feedback", "Report"];
 
     return (
         <table className="w-full min-w-max table-auto text-left">
@@ -30,7 +30,7 @@ const CommentTable = ({ data }) => {
                     data?.map((comment, index) => {
                         const isLast = index === data.length - 1;
                         return (
-                            <TableRow key={comment?._id} comment={comment} isLast={isLast} />
+                            <TableRow refetch={refetch} key={comment?._id} comment={comment} isLast={isLast} />
                         )
                     })
                 }
@@ -41,6 +41,7 @@ const CommentTable = ({ data }) => {
 
 CommentTable.propTypes = {
     data: PropTypes.array,
+    refetch: PropTypes.func,
 }
 
 export default CommentTable;

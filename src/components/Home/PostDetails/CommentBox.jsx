@@ -24,7 +24,6 @@ const CommentBox = ({ postId, refetch }) => {
         try {
             const res = await axiosSecure.post('/comments', userComment);
             console.log(res.data);
-            setCommentText('');
             refetch();
             toast.success('Commnet posted.');
             setLoading(false);
@@ -36,7 +35,7 @@ const CommentBox = ({ postId, refetch }) => {
     return (
         <div className="space-y-3">
             <Typography variant="h5" className="font-medium text-blue-gray-700">Share your thoughts on this posts!</Typography>
-            <Textarea defaultValue={commentText} onChange={(e) => setCommentText(e.target.value)} className=" !border-t-blue-gray-200 focus:!border-blue-gray-700 focus:!border-t-blue-gray-700" labelProps={{ className: "before:content-none after:content-none", }} />
+            <Textarea onChange={(e) => setCommentText(e.target.value)} className=" !border-t-blue-gray-200 focus:!border-blue-gray-700 focus:!border-t-blue-gray-700" labelProps={{ className: "before:content-none after:content-none", }} />
             <Button onClick={handleComment} color="blue">{loading ? <ImSpinner9 className="animate-spin" /> : 'Post'}</Button>
         </div>
     );

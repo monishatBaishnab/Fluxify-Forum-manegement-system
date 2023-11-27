@@ -3,12 +3,11 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
 import { Typography } from "@material-tailwind/react";
 import PostTable from "../../../components/Sheared/Dashboard/MyPosts/PostTable";
-import { ImSpinner } from "react-icons/im";
+import FetchLoading from "./FetchLoading";
 
 const MyPosts = () => {
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
-
     const getPosts = async () => {
         const res = await axiosSecure.get(`/posts?email=${user?.email}`);
         return res.data;
@@ -24,7 +23,7 @@ const MyPosts = () => {
                 <div className="overflow-x-auto">
                     {
                         isLoading ?
-                            <ImSpinner className="animate-spin text-center" />
+                            <FetchLoading />
                             :
                             <PostTable data={data} refetch={refetch} />}
                 </div>
