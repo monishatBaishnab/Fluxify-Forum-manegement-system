@@ -8,6 +8,9 @@ const userRoute = require('./src/routes/users/users');
 const authRoute = require('./src/routes/auth/index');
 const postRoute = require('./src/routes/posts/posts');
 const commentRoute = require('./src/routes/comments/comments');
+const annoucementRoute = require('./src/routes/annoucements/annoucements')
+const adminStateRoute = require('./src/routes/adminState/adminState')
+const postTagRoute = require('./src/routes/postTag/postTag')
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -17,6 +20,9 @@ app.use(authRoute);
 app.use(userRoute);
 app.use(postRoute);
 app.use(commentRoute);
+app.use(annoucementRoute);
+app.use(adminStateRoute);
+app.use(postTagRoute);
 
 app.get('/health', (req, res) => {
     res.send('Flucify server running..');

@@ -5,11 +5,15 @@ const findAll =  async(req, res, next) => {
         const filterObj = {};
 
         const postId = req.query.postId;
+        const report = req.query.report;
+        
         if(postId){
             filterObj.post = postId;
         }
-
-        const result = await Comment.find(filterObj).populate({path: 'user', select: 'name badge'});
+        if(report){
+            filterObj.report = 'true';
+        }
+        const result = await Comment.find(filterObj).populate('user');
         res.send(result);
     } catch (error) {
         next(error);

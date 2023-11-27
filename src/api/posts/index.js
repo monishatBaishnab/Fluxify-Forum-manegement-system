@@ -4,6 +4,7 @@ const findOne = require('../../api/posts/controllers/findOne');
 const insertOne = require('../../api/posts/controllers/insertOne');
 const updateDownvote = require('../../api/posts/controllers/updateDownvote');
 const updateUpvote = require('../../api/posts/controllers/updateUpvote');
+const countById = require('../../api/posts/controllers/count');
 
 module.exports = {
     deleteOne,
@@ -11,5 +12,6 @@ module.exports = {
     findOne,
     insertOne,
     updateDownvote,
-    updateUpvote
+    updateUpvote,
+    countById
 }

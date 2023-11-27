@@ -1,24 +1,18 @@
-const { findAll, findOne, updateOne, insertOne } = require('../../api/comments');
+const { findAll, findOne, updateOne, insertOne, deleteOne } = require('../../api/comments');
 const verifyUser = require('../../middlewares/verifyUser');
+const Comment = require('../../models/comments');
 
 
 const router = require('express').Router();
 
-// {
-//     "comment": 
-//     "date": 
-//     "feedback": null,
-//     "report": false,
-//     "user": 
-//     "post": 
-//}
+router.get('/comments', verifyUser, findAll);
 
-router.get('/comments', findAll);
+router.get('/comments/:id', verifyUser, findOne);
 
-router.get('/comments/:id',verifyUser, findOne);
+router.patch('/comments/:id', verifyUser, updateOne)
 
-router.put('/comments/:id',verifyUser, updateOne)
+router.post('/comments', verifyUser, insertOne);
 
-router.post('/comments',verifyUser, insertOne);
+router.delete('/comments/:id', verifyUser, deleteOne);
 
 module.exports = router;

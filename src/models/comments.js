@@ -15,7 +15,7 @@ const commentSchema = new Schema({
         default: null
     },
     report: {
-        type: Boolean,
+        type: String,
         default: false
     },
     user: {

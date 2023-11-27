@@ -18,6 +18,10 @@ const userSchema = new Schema({
         type: String,
         default: 'Bronze'
     },
+    role: {
+        type: String,
+        default: 'author'
+    },
     created_date: {
         type: Date,
         default: Date.now

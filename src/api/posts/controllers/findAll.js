@@ -2,12 +2,11 @@ const Post = require("../../../models/posts");
 
 const findAll = async (req, res, next) => {
     try {
-        const filterObj = {};
-
         const tag = req.query.tag;
         const offset = parseInt(req.query.offset);
         const page = parseInt(req.query.page);
         const sort = req.query.sort;
+        const email = req.query.email;
 
         const pipeline = [];
         const countPipeline = [];
@@ -35,7 +34,14 @@ const findAll = async (req, res, next) => {
         // Extract the count value from the result
         const count = countResult.length > 0 ? countResult[0].count : 0;
 
-        // Stage 3: Perform the actual query and populate user data
+        if ((!sort && sort === 'undefined') || sort === 'defult') {
+            pipeline.push(
+                {
+                    $sort: { time: -1 }
+                },
+            )
+        }
+
         pipeline.push(
             {
                 $addFields: {
@@ -47,8 +53,6 @@ const findAll = async (req, res, next) => {
                     }
                 }
             },
-            { $skip: offset * (page - 1) },
-            { $limit: offset },
             {
                 $project: {
                     title: 1,
@@ -72,21 +76,28 @@ const findAll = async (req, res, next) => {
             {
                 $unwind: '$user'
             }
-
         )
-        
-        if (!sort) {
-            pipeline.push(
-                {   
-                    $sort: {time: 1}
-                },
-            )
-        }else{
+
+        if (sort === 'popularity')  {
             pipeline.push(
                 {
-                    $sort: {voteDifference: -1}
+                    $sort: { voteDifference: -1 }
                 }
             )
+        }
+
+        if (offset && page) {
+            pipeline.push(
+                { $skip: offset * (page - 1) },
+                { $limit: offset }
+            )
+        }
+
+
+        if (email) {
+            pipeline.push({
+                $match: { "user.email": email }
+            })
         }
 
         // Execute the final aggregation pipeline
