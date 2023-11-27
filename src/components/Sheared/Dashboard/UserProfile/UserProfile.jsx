@@ -1,5 +1,4 @@
-import { Button, Chip, Typography } from "@material-tailwind/react";
-import { FaUserPen } from "react-icons/fa6";
+import { Chip, Typography } from "@material-tailwind/react";
 import PropTypes from 'prop-types';
 import { HiBadgeCheck } from "react-icons/hi";
 
@@ -21,7 +20,6 @@ const UserProfile = ({currentUser}) => {
                     <Typography variant="small" className="font-medium text-blue-gray-600">Email</Typography>
                     <Typography className="text-blue-gray-600">{currentUser?.email}</Typography>
                 </div>
-                <Button variant="text" className="flex items-center gap-2 text-blue-500"><FaUserPen className="text-base" />Edit Pofile</Button>
             </div>
         </div>
     );

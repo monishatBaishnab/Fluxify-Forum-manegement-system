@@ -6,7 +6,6 @@ import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
-import { tagOptions } from "../../../api/postTags";
 import useFetchUser from "../../../hooks/useFetchUser";
 import toast from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
@@ -32,8 +31,13 @@ const AddPost = () => {
         const res = await axiosSecure.get(`/posts/count?id=${currentUser?._id}`);
         return res.data;
     }
+    const getTags = async () => {
+        const res = await axiosSecure.get(`/post-tags`);
+        return res.data;
+    }
 
     const { data: count, isLoading, refetch } = useQuery({ queryKey: ['count', currentUser?._id], queryFn: getPosts, enabled: !!currentUser?._id });
+    const { data: postTags } = useQuery({ queryKey: ['post-tags'], queryFn: getTags});
 
     const fileUpload = async (e) => {
         setThumbLoading(true);
@@ -112,7 +116,7 @@ const AddPost = () => {
                                             closeMenuOnSelect={false}
                                             components={animatedComponents}
                                             isMulti
-                                            options={tagOptions}
+                                            options={postTags}
                                             onChange={setTags}
                                         />
                                     </div>

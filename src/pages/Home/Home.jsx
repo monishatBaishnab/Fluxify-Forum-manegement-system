@@ -1,4 +1,4 @@
-import { Button, Input, Typography } from "@material-tailwind/react";
+import { Button, Input, Option, Select, Typography } from "@material-tailwind/react";
 import PostContainer from "../../components/Home/PostContainer/PostContainer";
 import LoadinPost from "../../components/Home/PostContainer/LoadinPost";
 import Pagination from "../../components/Home/PostContainer/Pagination";
@@ -17,6 +17,7 @@ const Home = () => {
     const offset = 5;
     const tagRef = useRef(undefined);
     const [searchTag, setSearchTag] = useState(undefined);
+    const [sort, setSort] = useState(undefined);
 
     const handleSearch = () => {
         const tag = tagRef.current.value;
@@ -27,7 +28,8 @@ const Home = () => {
             setSearchTag(undefined);
         }
     }
-    const { data, isLoading } = useFetchAllPost(page, offset, searchTag);
+    const { data, isLoading } = useFetchAllPost(page, offset, searchTag, sort);
+
     const handleTagClick = (tag) => {
         if (tag === "All") {
             return setSearchTag(undefined);
@@ -36,20 +38,20 @@ const Home = () => {
         setSearchTag(tag);
     }
 
-    const getAnnouncements = async() => {
+    const getAnnouncements = async () => {
         const res = await axiosSecure.get('/annoucements');
         return res.data;
     }
 
-    const {data: annoucements, isLoading: annoucementsLoading} = useQuery({queryKey: ['announcements'], queryFn: getAnnouncements});
-    
+    const { data: annoucements, isLoading: annoucementsLoading } = useQuery({ queryKey: ['announcements'], queryFn: getAnnouncements });
+
     return (
         <div className="overflow-hidden">
             <div className="container py-10">
-                {!annoucementsLoading && annoucements?.length > 0 && <Announcements announcements={annoucements}  />}
+                {!annoucementsLoading && annoucements?.length > 0 && <Announcements announcements={annoucements} />}
                 <div className="bg-white rounded-lg p-4">
                     <Typography variant="h5" className="font-medium text-c-gray mb-3">Search Post</Typography>
-                    <div className="flex gap-2 items-center">
+                    <div className="flex gap-2 items-center flex-wrap">
                         <Input
                             inputRef={tagRef}
                             size="lg"
@@ -61,6 +63,12 @@ const Home = () => {
                         />
                         <div className="flex-1">
                             <Button onClick={handleSearch} className="bg-primary">Search</Button>
+                        </div>
+                        <div className="w-[150px]">
+                            <Select onChange={(data) => setSort(data)} label="Sort" containerProps={{ className: '!min-w-[150px]' }}>
+                                <Option value="defult">Default</Option>
+                                <Option value="popularity">Popularity</Option>
+                            </Select>
                         </div>
                     </div>
                 </div>

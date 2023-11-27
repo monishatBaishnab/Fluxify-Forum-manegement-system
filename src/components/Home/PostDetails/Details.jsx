@@ -16,6 +16,8 @@ const Details = ({ post, refetch }) => {
     const { _id, title, description, tags, upvote, downvote, user, time, image } = post || {};
     const deffDay = getDayAgo(time);
 
+    console.log(upvote);
+
     const handleUpVote = async () => {
         const find = upvote.filter(user => user === currentUser.email);
         if (find?.length > 0) {
