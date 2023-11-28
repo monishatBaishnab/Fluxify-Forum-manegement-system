@@ -1,4 +1,4 @@
-import { Button, Drawer, IconButton, List, Typography } from "@material-tailwind/react";
+import { Badge, Button, Drawer, IconButton, List, Typography } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 import logo from '../../../assets/fluxify.png'
 import { LuUserPlus } from "react-icons/lu";
@@ -9,12 +9,15 @@ import Profile from "./Profile";
 import useAuth from "../../../hooks/useAuth";
 import SidebarItems from "../SidebarItems/SidebarItems";
 import { usersItems } from "../../../api/sidebarLists";
+import { IoNotifications } from "react-icons/io5";
+import useFetchAnnoucements from "../../../hooks/useFetchAnnoucements";
 
 const Navbar = () => {
     const [openDrower, setOpenDrower] = useState(false);
     const closeDrawer = () => setOpenDrower(!openDrower);
     const { user } = useAuth();
 
+    const {annoucements} = useFetchAnnoucements();
     useEffect(() => {
         window.addEventListener(
             "resize",
@@ -30,7 +33,12 @@ const Navbar = () => {
                         Fluxify
                     </Typography>
                 </Link>
-                <div className="flex gap-2">
+                <div className="flex items-center gap-3">
+                    <Badge content={annoucements?.length}>
+                        <div className="p-2 bg-blue-100 cursor-pointer transition-all rounded-full text-blue-500">
+                            <IoNotifications className="text-xl" />
+                        </div>
+                    </Badge>
                     {user === null ?
                         <div className="flex items-center gap-2">
                             <Link to='/signin'><Button className="bg-primary flex items-center gap-2 text-base font-normal capitalize py-2"><LuUserPlus className="text-lg" /> Join us</Button></Link>

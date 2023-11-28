@@ -25,7 +25,7 @@ const AdminStates = ({data}) => {
 };
 
 AdminStates.propTypes = {
-    data: PropTypes.array,
+    data: PropTypes.object,
 }
 
 export default AdminStates;

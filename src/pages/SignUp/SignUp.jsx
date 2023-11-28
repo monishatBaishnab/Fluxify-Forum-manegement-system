@@ -9,7 +9,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { FcGoogle } from "react-icons/fc";
 
 const SignUp = () => {
-    const { user, signUpWithEmailAndPass, updateUser, signInWithGoogle } = useAuth();
+    const { signUpWithEmailAndPass, updateUser, signInWithGoogle } = useAuth();
     const { register, handleSubmit } = useForm();
     const navigate = useNavigate();
     const axiosPublic = useAxiosPublic();
@@ -49,7 +49,7 @@ const SignUp = () => {
     const handleGoogleSignIn = async () => {
         const toastId = toast.loading('Signing in user...');
         try {
-            await signInWithGoogle()
+            const { user } = await signInWithGoogle();
             toast.success('User signed in', { id: toastId });
             const signedUser = {
                 "name": user?.displayName,
@@ -57,7 +57,7 @@ const SignUp = () => {
                 "image": user?.photoURL
             }
 
-            await axiosPublic.post('/users', signedUser);
+            await axiosPublic.put(`/users?email=${user?.email}`, signedUser);
             await axiosSecure.post('/create-token', { email: user?.email });
             navigate('/');
         } catch (error) {

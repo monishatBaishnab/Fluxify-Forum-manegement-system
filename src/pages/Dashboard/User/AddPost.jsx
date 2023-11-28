@@ -11,6 +11,7 @@ import toast from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
 import FetchLoading from "./FetchLoading";
 import DashboardContainer from "../../../components/Sheared/Dashboard/DashboardContainer/DashboardContainer";
+import { useNavigate } from "react-router-dom";
 
 const animatedComponents = makeAnimated();
 
@@ -21,6 +22,7 @@ const AddPost = () => {
     const axiosSecure = useAxiosSecure();
     const [tags, setTags] = useState(null);
     const { data: currentUser } = useFetchUser();
+    const navigate = useNavigate();
 
     let postLimit = 5;
     if(currentUser?.badge === 'Golde'){
@@ -79,11 +81,11 @@ const AddPost = () => {
                 isLoading ?
                     <FetchLoading />
                     :
-                    count?.count[0]?.count >= postLimit && currentUser?.role !== 'admin' ?
+                    count?.count[0]?.count >= postLimit && currentUser?.role !== 'admin' && currentUser?.badge !== 'Gold' ?
                         <div className="flex flex-col items-center gap-2">
                             <Typography variant="h4" color="red" className="text-center">Your Post Limit Over.</Typography>
                             <Typography className="font-normal text-blue-gray-500 text-center">You have reached the maximum post limit. Become a member to unlock more posting limit!</Typography>
-                            <Button color="blue">Become a Member</Button>
+                            <Button onClick={() => navigate('/dashboard/payment')} color="blue">Become a Member</Button>
                         </div>
                         :
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">

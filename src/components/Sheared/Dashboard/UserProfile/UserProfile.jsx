@@ -10,7 +10,7 @@ const UserProfile = ({currentUser}) => {
             </div>
             <div className="flex items-start flex-col space-y-2">
                 <div>
-                    <Chip color="blue" className="" value={currentUser?.badge} icon={<HiBadgeCheck className="text-xl" />} />
+                    <Chip className={`${currentUser?.badge === 'Gold' ? 'bg-[#FFD700]' : 'bg-blue-500'}`} value={currentUser?.badge} icon={<HiBadgeCheck className="text-xl" />} />
                 </div>
                 <div>
                     <Typography variant="small" className="font-medium text-blue-gray-600">Name</Typography>

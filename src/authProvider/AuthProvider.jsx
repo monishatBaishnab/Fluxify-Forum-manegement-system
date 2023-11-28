@@ -9,7 +9,7 @@ export const AuthContext = createContext();
 const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({children}) => {
-    const [user, setUser] = useState();
+    const [user, setUser] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const axiosSecure = useAxiosSecure();
     
@@ -27,12 +27,12 @@ const AuthProvider = ({children}) => {
         const unSubscribe = onAuthStateChanged(auth, async (currentUser) => {
             setUser(currentUser);
             setIsLoading(false);
-            if(currentUser){
-                await axiosSecure.post('/create-token', {email: currentUser?.email});
+            if(user){
+                await axiosSecure.post('/create-token', {email: user?.email});
             }
         })
         return () => unSubscribe();
-    }, [axiosSecure])
+    }, [axiosSecure, user])
 
     const authInfo = {
         signUpWithEmailAndPass: (email, password) => handleAction(createUserWithEmailAndPassword, email, password),

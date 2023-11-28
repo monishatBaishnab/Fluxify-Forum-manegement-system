@@ -1,30 +1,33 @@
 import { Button, Typography } from "@material-tailwind/react";
 import PostUser from "../../Sheared/Post/PostUser";
-import { FaShare } from "react-icons/fa";
 import { AiFillDislike, AiFillLike } from "react-icons/ai";
 import toast from "react-hot-toast";
 import { getDayAgo } from "../../../api/getDays";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import PropTypes from 'prop-types';
+import { FacebookIcon, FacebookShareButton} from 'react-share';
 
 const Details = ({ post, refetch }) => {
     const axiosSecure = useAxiosSecure();
     const { user: currentUser } = useAuth();
 
-
     const { _id, title, description, tags, upvote, downvote, user, time, image } = post || {};
     const deffDay = getDayAgo(time);
 
-    console.log(upvote);
+    const findUpvote = upvote.filter(user => user === currentUser.email);
+    const findDownvote = downvote.filter(user => user === currentUser.email);
 
     const handleUpVote = async () => {
-        const find = upvote.filter(user => user === currentUser.email);
-        if (find?.length > 0) {
+        let down='false';
+        if (findUpvote?.length > 0) {
             return toast.error('You are alrady liked this post.');
         }
+        if (findDownvote?.length > 0) {
+            down='true';
+        }
 
-        const res = await axiosSecure.put(`/like/${_id}?user=${currentUser.email}`);
+        const res = await axiosSecure.put(`/like/${_id}?user=${currentUser.email}&down=${down}`);
         refetch();
         if (!res?.data?.upvote) {
             toast.error('You are alrady liked this post.');
@@ -32,16 +35,26 @@ const Details = ({ post, refetch }) => {
     }
 
     const handleDownVote = async () => {
-        const find = downvote.filter(user => user === currentUser.email);
-        if (find?.length > 0) {
+        let down='false';
+        if (findDownvote?.length > 0) {
             return toast.error('You are alrady unliked this post.');
         }
-        const res = await axiosSecure.put(`/unlike/${_id}?user=${currentUser.email}`);
-        refetch();
-        if (!res?.data?.downvote) {
-            toast.error('You are alrady unliked this post.');
+        if (findUpvote?.length > 0) {
+            down='true';
+        }
+        try {
+            const res = await axiosSecure.put(`/unlike/${_id}?user=${currentUser.email}&down=${down}`);
+            refetch();
+            if (!res?.data?.downvote) {
+                toast.error('You are alrady unliked this post.');
+            }
+            
+        } catch (error) {
+            console.log(error);
         }
     }
+
+    const shareUrl = `https://fluxify-server-mjbc74ixo-monishats-projects.vercel.app/posts/${_id}`
 
     return (
         <div className="bg-white p-5 rounded-lg space-y-5">
@@ -62,7 +75,13 @@ const Details = ({ post, refetch }) => {
                     {/* <Typography as='span' className="flex items-center gap-2 text-[#808080]"><FaRegComments /> {comment}</Typography> */}
                     <Button onClick={handleUpVote} color="blue" size="sm" className="flex items-center gap-2"><AiFillLike className="text-xl" />{upvote?.length > 0 ? upvote?.length : ''}</Button>
                     <Button onClick={handleDownVote} color="amber" size="sm" className="flex items-center gap-2"><AiFillDislike className="text-xl" />{downvote?.length > 0 ? downvote?.length : ''}</Button>
-                    <Button color="green" size="sm" className="flex items-center gap-2"><FaShare className="text-xl" /></Button>
+                   
+                    <FacebookShareButton
+                        url={shareUrl}
+                        hashtag="#fluxify"
+                    >
+                        <FacebookIcon size={40} round />
+                    </FacebookShareButton>
                 </div>
             </div>
         </div>

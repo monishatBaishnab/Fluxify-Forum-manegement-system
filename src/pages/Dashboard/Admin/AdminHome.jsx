@@ -21,14 +21,7 @@ const AdminHome = () => {
     }
 
     const { data, isLoading: staLoading } = useQuery({ queryKey: ['states'], queryFn: getAdminState });
-    let chartData;
-    if (!isLoading) {
-        chartData = Object.entries(data).map(([name, uv]) => ({
-            name,
-            uv: uv || 0,
-        }));
-    }
-
+    
     return (
         <DashboardContainer title='Admin Profile'>
             {
@@ -41,7 +34,7 @@ const AdminHome = () => {
                 :
                 <div className="grid grid-cols-1 md:grid-cols-2">
                     <UserProfile currentUser={currentUser} />
-                    <StatePie chartData={chartData} />
+                    <StatePie data={data} />
                 </div>
             }
             <div>

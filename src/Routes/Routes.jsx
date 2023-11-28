@@ -15,6 +15,8 @@ import Comments from "../pages/Dashboard/User/Comments";
 import ManageUsers from "../pages/Dashboard/Admin/ManageUsers";
 import Announcement from "../pages/Dashboard/Admin/Announcement";
 import ReportedComments from "../pages/Dashboard/Admin/ReportedComments";
+import AdminRoute from "./AdminRoute";
+import Payment from "../pages/Dashboard/User/Payment";
 
 const Routes = createBrowserRouter([
     {
@@ -62,19 +64,23 @@ const Routes = createBrowserRouter([
             },
             {
                 path: 'admin-profile',
-                element: <AdminHome />
+                element: <AdminRoute><AdminHome /></AdminRoute>
             },
             {
                 path: 'manage-users',
-                element: <ManageUsers />
+                element: <AdminRoute><ManageUsers /></AdminRoute>
             },
             {
                 path: 'reported-comments',
-                element: <ReportedComments />
+                element: <AdminRoute><ReportedComments /></AdminRoute>
             },
             {
                 path: 'announcement',
-                element: <Announcement />
+                element: <AdminRoute><Announcement /></AdminRoute>
+            },
+            {
+                path: 'payment',
+                element: <AdminRoute><Payment /></AdminRoute>
             }
         ]
     }

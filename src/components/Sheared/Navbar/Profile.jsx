@@ -54,9 +54,8 @@ const Profile = () => {
                             </Typography>
                         </MenuItem>
                     </Link>
-                    <MenuItem className="hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10">
+                    <MenuItem onClick={handleClick} className="hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10">
                         <Typography
-                            onClick={handleClick}
                             as="span"
                             variant="small"
                             className="font-normal flex items-center gap-2"

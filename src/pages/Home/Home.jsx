@@ -7,12 +7,10 @@ import useFetchAllPost from "../../hooks/useFetchAllPost";
 import postTags from "../../api/postTags";
 import empty from '../../assets/empty.svg'
 import Announcements from "../../components/Home/Announcements/Announcements";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { useQuery } from "@tanstack/react-query";
+import useFetchAnnoucements from "../../hooks/useFetchAnnoucements";
 
 
 const Home = () => {
-    const axiosSecure = useAxiosSecure();
     const [page, setPage] = useState(1);
     const offset = 5;
     const tagRef = useRef(undefined);
@@ -38,12 +36,7 @@ const Home = () => {
         setSearchTag(tag);
     }
 
-    const getAnnouncements = async () => {
-        const res = await axiosSecure.get('/annoucements');
-        return res.data;
-    }
-
-    const { data: annoucements, isLoading: annoucementsLoading } = useQuery({ queryKey: ['announcements'], queryFn: getAnnouncements });
+    const { annoucements, annoucementsLoading } = useFetchAnnoucements();
 
     return (
         <div className="overflow-hidden">

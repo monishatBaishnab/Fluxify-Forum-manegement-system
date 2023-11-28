@@ -8,19 +8,20 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const SignIn = () => {
-    const { signInWithEmailAndPass, signInWithGoogle, user } = useAuth();
+    const { signInWithEmailAndPass, signInWithGoogle } = useAuth();
     const { register, handleSubmit } = useForm();
     const navigate = useNavigate();
     const axiosSecure = useAxiosSecure();
     const axiosPublic = useAxiosPublic();
     const location = useLocation();
     const navigateLocation = location?.state?.from ? location?.state?.from : '/';
+    
 
     const formSubmit = async (data) => {
         const toastId = toast.loading('Signing in user...');
         try {
             await signInWithEmailAndPass(data.email, data.password);
-            await axiosSecure.post('/create-token', {email: user?.email});
+            await axiosSecure.post('/create-token', {email: data?.email});
             toast.success('User signed in', { id: toastId });
             navigate(navigateLocation);
         } catch (error) {
@@ -33,7 +34,7 @@ const SignIn = () => {
     const handleGoogleSignIn = async () => {
         const toastId = toast.loading('Signing in user...');
         try {
-            await signInWithGoogle()
+            const {user} = await signInWithGoogle();
             toast.success('User signed in', { id: toastId });
             const signedUser = {
                 "name": user?.displayName,
@@ -41,7 +42,7 @@ const SignIn = () => {
                 "image": user?.photoURL
             }
 
-            await axiosPublic.post('/users', signedUser);
+            await axiosPublic.put(`/users?email=${user?.email}`, signedUser);
             await axiosSecure.post('/create-token', {email: user?.email});
             navigate(navigateLocation);
         } catch (error) {
