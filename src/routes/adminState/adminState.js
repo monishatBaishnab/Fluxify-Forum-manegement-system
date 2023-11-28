@@ -1,9 +1,10 @@
+const verifyAdmin = require('../../middlewares/verifyAdmin');
 const verifyUser = require('../../middlewares/verifyUser');
 const User = require('../../models/users');
 
 const router = require('express').Router();
 
-router.get('/admin-states', verifyUser, async (req, res, next) => {
+router.get('/admin-states', verifyUser, verifyAdmin, async (req, res, next) => {
     try {
         const totalPage = await User.aggregate([
             {

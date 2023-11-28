@@ -1,39 +1,9 @@
-const express = require('express');
-const globalErrorHandler = require('./src/utils/globalErrorHandler');
-const pathErrorHandler = require('./src/utils/pathErrorHandler');
-const applyMiddlewores = require('./src/middlewares');
+require('dotenv').config();
+const http = require('http');
+const app = require('./src/app');
 const dbConnect = require('./src/db/dbConnection');
-
-const userRoute = require('./src/routes/users/users');
-const authRoute = require('./src/routes/auth/index');
-const postRoute = require('./src/routes/posts/posts');
-const commentRoute = require('./src/routes/comments/comments');
-const annoucementRoute = require('./src/routes/annoucements/annoucements')
-const adminStateRoute = require('./src/routes/adminState/adminState')
-const postTagRoute = require('./src/routes/postTag/postTag')
-const app = express();
+const server = http.createServer(app);
 const port = process.env.PORT || 5000;
-
-applyMiddlewores(app);
-
-app.use(authRoute);
-app.use(userRoute);
-app.use(postRoute);
-app.use(commentRoute);
-app.use(annoucementRoute);
-app.use(adminStateRoute);
-app.use(postTagRoute);
-
-app.get('/health', (req, res) => {
-    res.send('Flucify server running..');
-})
-
-
-
-// 404 error handler middleware
-app.use(pathErrorHandler);
-// Global error handler middleware
-app.use(globalErrorHandler);
 
 const main = async () => {
     await dbConnect();

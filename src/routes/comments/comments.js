@@ -1,4 +1,5 @@
 const { findAll, findOne, updateOne, insertOne, deleteOne } = require('../../api/comments');
+const verifyAdmin = require('../../middlewares/verifyAdmin');
 const verifyUser = require('../../middlewares/verifyUser');
 const Comment = require('../../models/comments');
 
@@ -13,6 +14,6 @@ router.patch('/comments/:id', verifyUser, updateOne)
 
 router.post('/comments', verifyUser, insertOne);
 
-router.delete('/comments/:id', verifyUser, deleteOne);
+router.delete('/comments/:id', verifyUser, verifyAdmin, deleteOne);
 
 module.exports = router;
