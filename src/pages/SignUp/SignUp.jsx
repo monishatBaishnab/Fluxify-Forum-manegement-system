@@ -42,6 +42,7 @@ const SignUp = () => {
             toast.success("User created.", { id: toastId });
             navigate('/');
         } catch (error) {
+            toast.success("User created Failed.", { id: toastId });
             console.log(error);
         }
 

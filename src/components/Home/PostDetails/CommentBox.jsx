@@ -22,8 +22,7 @@ const CommentBox = ({ postId, refetch }) => {
             "post": postId
         }
         try {
-            const res = await axiosSecure.post('/comments', userComment);
-            console.log(res.data);
+            await axiosSecure.post('/comments', userComment);
             refetch();
             toast.success('Commnet posted.');
             setLoading(false);

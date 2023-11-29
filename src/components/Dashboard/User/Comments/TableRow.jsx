@@ -11,8 +11,7 @@ const TableRow = ({ comment, isLast, refetch }) => {
     const [feedback, setFeedback] = useState(null);
 
     const handleFeedback = async () => {
-        const res = await axiosSecure.patch(`/comments/${comment?._id}`, { feedback, report: true })
-        console.log(res);
+        await axiosSecure.patch(`/comments/${comment?._id}`, { feedback, report: true })
         setFeedback(null);
         refetch();
     }

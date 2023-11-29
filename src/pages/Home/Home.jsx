@@ -1,4 +1,4 @@
-import { Button, Input, Option, Select, Typography } from "@material-tailwind/react";
+import { Input, Option, Select, Typography } from "@material-tailwind/react";
 import PostContainer from "../../components/Home/PostContainer/PostContainer";
 import LoadinPost from "../../components/Home/PostContainer/LoadinPost";
 import Pagination from "../../components/Home/PostContainer/Pagination";
@@ -8,6 +8,7 @@ import postTags from "../../api/postTags";
 import empty from '../../assets/empty.svg'
 import Announcements from "../../components/Home/Announcements/Announcements";
 import useFetchAnnoucements from "../../hooks/useFetchAnnoucements";
+import { AwesomeButton } from "react-awesome-button";
 
 
 const Home = () => {
@@ -15,7 +16,7 @@ const Home = () => {
     const offset = 5;
     const tagRef = useRef(undefined);
     const [searchTag, setSearchTag] = useState(undefined);
-    const [sort, setSort] = useState(undefined);
+    const [sort, setSort] = useState('defult');
 
     const handleSearch = () => {
         const tag = tagRef.current.value;
@@ -55,10 +56,10 @@ const Home = () => {
                             }}
                         />
                         <div className="flex-1">
-                            <Button onClick={handleSearch} className="bg-primary">Search</Button>
+                            <AwesomeButton type="secondary" onPress={handleSearch} className="bg-primary">Search</AwesomeButton>
                         </div>
                         <div className="w-[150px]">
-                            <Select onChange={(data) => setSort(data)} label="Sort" containerProps={{ className: '!min-w-[150px]' }}>
+                            <Select value={sort} onChange={(data) => setSort(data)} label="Sort" containerProps={{ className: '!min-w-[150px]' }}>
                                 <Option value="defult">Default</Option>
                                 <Option value="popularity">Popularity</Option>
                             </Select>

@@ -8,6 +8,7 @@ import AuthProvider from './authProvider/AuthProvider'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { SkeletonTheme } from 'react-loading-skeleton'
+import 'react-awesome-button/dist/styles.css';
 
 const queryClient = new QueryClient();
 

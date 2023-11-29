@@ -17,6 +17,7 @@ import Announcement from "../pages/Dashboard/Admin/Announcement";
 import ReportedComments from "../pages/Dashboard/Admin/ReportedComments";
 import AdminRoute from "./AdminRoute";
 import Payment from "../pages/Dashboard/User/Payment";
+import Membership from "../pages/Membership/Membership";
 
 const Routes = createBrowserRouter([
     {
@@ -27,6 +28,10 @@ const Routes = createBrowserRouter([
             {
                 index: true,
                 element: <Home />
+            },
+            {
+                path: 'membership',
+                element: <Membership />
             },
             {
                 path: 'posts/:id',
@@ -44,43 +49,43 @@ const Routes = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        element: <PrivateRoute><Dashboard /></PrivateRoute>,
+        element: <Dashboard />,
         children: [
             {
                 path: 'user-profile',
-                element: <UserHome />
+                element: <PrivateRoute><UserHome /></PrivateRoute>
             },
             {
                 path: 'add-post',
-                element: <AddPost />
+                element: <PrivateRoute><AddPost /></PrivateRoute>
             },
             {
                 path: 'my-post',
-                element: <MyPosts />
+                element: <PrivateRoute><MyPosts /></PrivateRoute>
             },
             {
                 path: 'comments/:id',
-                element: <Comments />
+                element: <PrivateRoute><Comments /></PrivateRoute>
             },
             {
                 path: 'admin-profile',
-                element: <AdminRoute><AdminHome /></AdminRoute>
+                element: <AdminRoute><PrivateRoute><AdminHome /></PrivateRoute></AdminRoute>
             },
             {
                 path: 'manage-users',
-                element: <AdminRoute><ManageUsers /></AdminRoute>
+                element: <AdminRoute><PrivateRoute><ManageUsers /></PrivateRoute></AdminRoute>
             },
             {
                 path: 'reported-comments',
-                element: <AdminRoute><ReportedComments /></AdminRoute>
+                element: <AdminRoute><PrivateRoute><ReportedComments /></PrivateRoute></AdminRoute>
             },
             {
                 path: 'announcement',
-                element: <AdminRoute><Announcement /></AdminRoute>
+                element: <AdminRoute><PrivateRoute><Announcement /></PrivateRoute></AdminRoute>
             },
             {
                 path: 'payment',
-                element: <AdminRoute><Payment /></AdminRoute>
+                element: <AdminRoute><PrivateRoute><Payment /></PrivateRoute></AdminRoute>
             }
         ]
     }

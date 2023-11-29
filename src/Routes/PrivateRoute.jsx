@@ -11,7 +11,7 @@ const PrivateRoute = ({children}) => {
         return <LoadingPage />
     }
     if(!user) {
-        return <Navigate to='/signin' state={{from: location.pathname}} replace={true} />
+        return <Navigate to='/signin' state={{from: location.pathname}} />
     }
     return children;
 };

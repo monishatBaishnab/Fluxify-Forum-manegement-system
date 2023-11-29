@@ -3,18 +3,11 @@ import PropTypes from 'prop-types';
 import { ImSpinner2 } from "react-icons/im";
 import Comment from "./Comment";
 import CommentBox from "./CommentBox";
-import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import useFetchCommentsByPostId from "../../../hooks/useFetchCommentsByPostId";
 
-const Comments = ({  postId }) => {
-    const axiosSecure = useAxiosSecure();
-
-    const getComments = async () => {
-        const res = axiosSecure.get(`/comments?postId=${postId}`);
-        return res;
-    }
-    const { data, isLoading, refetch} = useQuery({ queryKey: ['comments', postId], queryFn: getComments });
-
+const Comments = ({ postId }) => {
+    const { data, isLoading, refetch } = useFetchCommentsByPostId(postId);
+    
     return (
         <div className="mt-5 p-5 bg-white">
             <CommentBox postId={postId} refetch={refetch} />

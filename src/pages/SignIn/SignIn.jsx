@@ -14,8 +14,11 @@ const SignIn = () => {
     const axiosSecure = useAxiosSecure();
     const axiosPublic = useAxiosPublic();
     const location = useLocation();
-    const navigateLocation = location?.state?.from ? location?.state?.from : '/';
-    
+
+    let navigateLocation = location?.state?.from ? location?.state?.from : '/';
+    if(navigateLocation.indexOf('/dashboard') !== -1){
+        navigateLocation = '/';
+    }
 
     const formSubmit = async (data) => {
         const toastId = toast.loading('Signing in user...');
