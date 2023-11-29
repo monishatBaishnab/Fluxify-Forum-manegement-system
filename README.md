@@ -1,6 +1,6 @@
 
 ## Welcome to Fluxify - Elevating Online Forum Management!
-[Live link](https://fluxify-72def.web.app/)
+[Live link](https://fluxify-72def.firebaseapp.com/)
 
 Fluxify is a dynamic forum management platform that empowers administrators and users alike with a host of robust features and seamless functionalities. Here's a closer look at what sets Fluxify apart:
 
