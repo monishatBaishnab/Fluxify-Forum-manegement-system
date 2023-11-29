@@ -10,13 +10,13 @@ const Profile = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { user, signOutUser } = useAuth();
     const axiosSecure = useAxiosSecure();
-    const {data: currentUser} = useFetchUser();
+    const { data: currentUser } = useFetchUser();
 
     let navigateLocation = '/dashboard/user-profile';
-    if(currentUser?.role == 'admin'){
+    if (currentUser?.role == 'admin') {
         navigateLocation = '/dashboard/admin-profile';
     }
-    
+
     const handleClick = async () => {
         setIsMenuOpen(false);
         await signOutUser();
@@ -42,6 +42,9 @@ const Profile = () => {
                     </Button>
                 </MenuHandler>
                 <MenuList className="p-1">
+                    <MenuItem>
+                        <Typography className="font-normal text-blue-gray-600">{user?.email}</Typography>
+                    </MenuItem>
                     <Link to={navigateLocation}>
                         <MenuItem>
                             <Typography
