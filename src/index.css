@@ -37,3 +37,7 @@
     background-color: #f1f1f1; /* color of the track */
     height: 2px;
 }
+
+.koyZDM{
+    min-height: 300px !important;
+}

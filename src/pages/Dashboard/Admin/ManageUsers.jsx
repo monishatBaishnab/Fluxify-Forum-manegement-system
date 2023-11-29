@@ -11,7 +11,7 @@ const ManageUsers = () => {
         return res.data;
     }
 
-    const {data, isLoading, refetch} = useQuery({queryKey: ['users'], queryFn: getUsers});
+    const { data, isLoading, refetch } = useQuery({ queryKey: ['users'], queryFn: getUsers });
 
     return (
         <DashboardContainer title='Manage Uasers'>

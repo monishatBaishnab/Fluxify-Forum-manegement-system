@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
-import PostTable from "../../../components/Sheared/Dashboard/MyPosts/PostTable";
 import FetchLoading from "./FetchLoading";
 import DashboardContainer from "../../../components/Sheared/Dashboard/DashboardContainer/DashboardContainer";
+import PostTable from "../../../components/Dashboard/User/MyPosts/PostTable";
 
 const MyPosts = () => {
     const axiosSecure = useAxiosSecure();

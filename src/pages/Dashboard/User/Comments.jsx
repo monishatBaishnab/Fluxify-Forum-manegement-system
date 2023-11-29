@@ -13,6 +13,7 @@ const Comments = () => {
         return res.data;
     }
     const { data, isLoading, refetch } = useQuery({ queryKey: ['comments', id], queryFn: getComments, enabled: !!id });
+
     return (
         <DashboardContainer title='Comments'>
             {
