@@ -33,8 +33,8 @@ const findAll = async (req, res, next) => {
         const countResult = await Post.aggregate(countPipeline);
         // Extract the count value from the result
         const count = countResult.length > 0 ? countResult[0].count : 0;
-
-        if ((!sort && sort === 'undefined') || sort === 'defult') {
+        
+        if (!sort || sort === 'undefined' || sort === 'defult') {
             pipeline.push(
                 {
                     $sort: { time: -1 }

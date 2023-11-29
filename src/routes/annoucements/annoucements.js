@@ -6,7 +6,7 @@ const router = require('express').Router();
 
 router.get('/annoucements', async (req, res, next) => {
     try {
-        const result = await Announcement.find();
+        const result = await Announcement.find().populate({path: 'user', select: '_id, email'});
         res.send(result);
     } catch (error) {
         next(error);
