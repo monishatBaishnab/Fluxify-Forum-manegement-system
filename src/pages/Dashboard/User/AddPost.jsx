@@ -12,6 +12,7 @@ import { useQuery } from "@tanstack/react-query";
 import FetchLoading from "./FetchLoading";
 import DashboardContainer from "../../../components/Sheared/Dashboard/DashboardContainer/DashboardContainer";
 import { useNavigate } from "react-router-dom";
+import useFetchTags from "../../../hooks/useFetchTags";
 
 const animatedComponents = makeAnimated();
 
@@ -33,13 +34,10 @@ const AddPost = () => {
         const res = await axiosSecure.get(`/posts/count?id=${currentUser?._id}`);
         return res.data;
     }
-    const getTags = async () => {
-        const res = await axiosSecure.get(`/post-tags`);
-        return res.data;
-    }
 
     const { data: count, isLoading, refetch } = useQuery({ queryKey: ['count', currentUser?._id], queryFn: getPosts, enabled: !!currentUser?._id });
-    const { data: postTags } = useQuery({ queryKey: ['post-tags'], queryFn: getTags});
+    
+    const postTags = useFetchTags();
 
     const fileUpload = async (e) => {
         setThumbLoading(true);

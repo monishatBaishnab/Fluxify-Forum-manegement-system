@@ -9,18 +9,20 @@ const StatePie = ({ data }) => {
             uv: uv || 0,
         }));
     }
-    
+
     const COLORS = ['#0088FE', '#00C49F', '#FFBB28'];
     return (
-        <PieChart width={400} height={400}>
-            <Legend />
-            <Tooltip />
-            <Pie data={chartData} dataKey="uv" cx="50%" cy="50%" outerRadius={80} fill="#82ca9d" label>
-                {chartData?.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                ))}
-            </Pie>
-        </PieChart>
+        <div className="flex justify-center">
+            <PieChart width={250} height={250}>
+                <Legend />
+                <Tooltip />
+                <Pie data={chartData} dataKey="uv" cx="50%" cy="50%" outerRadius={80} fill="#82ca9d" label>
+                    {chartData?.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    ))}
+                </Pie>
+            </PieChart>
+        </div>
     );
 };
 

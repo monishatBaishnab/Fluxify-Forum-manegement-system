@@ -17,7 +17,7 @@ const Navbar = () => {
     const closeDrawer = () => setOpenDrower(!openDrower);
     const { user } = useAuth();
 
-    const {annoucements} = useFetchAnnoucements();
+    const { annoucements } = useFetchAnnoucements();
     useEffect(() => {
         window.addEventListener(
             "resize",
@@ -40,7 +40,7 @@ const Navbar = () => {
                         </div>
                     </Badge>
                     {user === null ?
-                        <div className="flex items-center gap-2">
+                        <div className="hidden md:flex items-center gap-2">
                             <Link to='/signin'><Button className="bg-primary flex items-center gap-2 text-base font-normal capitalize py-2"><LuUserPlus className="text-lg" /> Join us</Button></Link>
                             <Link to='/signup'><Button className="bg-c-blue/20 text-c-blue flex items-center gap-2 text-base font-normal capitalize py-2"><AiOutlineLogin className="text-lg" /> Sign up </Button></Link>
                         </div>
@@ -53,6 +53,12 @@ const Navbar = () => {
                 <List className="p-0">
                     <SidebarItems items={usersItems} />
                 </List>
+                {user === null &&
+                    <div className="flex items-center justify-center gap-2 absolute bottom-5 left-0 right-0 md:hidden">
+                        <Link to='/signin'><Button className="bg-primary flex items-center gap-2 text-base font-normal capitalize py-2"><LuUserPlus className="text-lg" /> Join us</Button></Link>
+                        <Link to='/signup'><Button className="bg-c-blue/20 text-c-blue flex items-center gap-2 text-base font-normal capitalize py-2"><AiOutlineLogin className="text-lg" /> Sign up </Button></Link>
+                    </div>
+                }
             </Drawer>
         </div>
     );

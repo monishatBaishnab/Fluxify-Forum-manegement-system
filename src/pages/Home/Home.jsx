@@ -4,11 +4,11 @@ import LoadinPost from "../../components/Home/PostContainer/LoadinPost";
 import Pagination from "../../components/Home/PostContainer/Pagination";
 import { useRef, useState } from "react";
 import useFetchAllPost from "../../hooks/useFetchAllPost";
-import postTags from "../../api/postTags";
 import empty from '../../assets/empty.svg'
 import Announcements from "../../components/Home/Announcements/Announcements";
 import useFetchAnnoucements from "../../hooks/useFetchAnnoucements";
 import { AwesomeButton } from "react-awesome-button";
+import useFetchTags from "../../hooks/useFetchTags";
 
 
 const Home = () => {
@@ -38,6 +38,7 @@ const Home = () => {
     }
 
     const { annoucements, annoucementsLoading } = useFetchAnnoucements();
+    const postTags = useFetchTags();
 
     return (
         <div className="overflow-hidden">
@@ -68,7 +69,7 @@ const Home = () => {
                 </div>
                 <div className="my-2 overflow-hidden p-5 rounded-md bg-white mt-5 max-w-[calc(100vw_-_40px)] md:max-w-[calc(100vw_-_80px)] lg:max-w-[calc(100vw_-_660px)]">
                     <div id="tags" className="flex overflow-x-auto gap-2 py-2">
-                        {postTags.map(tag => <Typography onClick={() => handleTagClick(tag)} key={tag} className={`px-2 cursor-pointer bg-[#EAEAEA] rounded-sm text-[#808080] transition-all hover:bg-blue-500 hover:text-white ${tag === searchTag ? 'bg-blue-500 text-white' : ''}`} as='span'>{tag}</Typography>)}
+                        {postTags?.map(tag => <Typography onClick={() => handleTagClick(tag?.value)} key={tag?._id} className={`px-2 cursor-pointer bg-[#EAEAEA] rounded-sm text-[#808080] transition-all hover:bg-blue-500 hover:text-white ${tag?.value === searchTag ? 'bg-blue-500 text-white' : ''}`} as='span'>{tag?.label}</Typography>)}
                     </div>
                 </div>
                 {isLoading ?

@@ -21,24 +21,26 @@ const AdminHome = () => {
     }
 
     const { data, isLoading: staLoading } = useQuery({ queryKey: ['states'], queryFn: getAdminState });
-    
+
     return (
         <DashboardContainer title='Admin Profile'>
-            {
-                staLoading ? <FetchLoading />
+            <div className="space-y-5">
+                {
+                    staLoading ? <FetchLoading />
+                        :
+                        <AdminStates data={data} />
+                }
+                {user === undefined || isLoading ?
+                    <ProfileSkeliton />
                     :
-                    <AdminStates data={data} />
-            }
-            {user === undefined || isLoading ?
-                <ProfileSkeliton />
-                :
-                <div className="grid grid-cols-1 md:grid-cols-2">
-                    <UserProfile currentUser={currentUser} />
-                    <StatePie data={data} />
+                    <div className="grid grid-cols-1 md:grid-cols-2">
+                        <UserProfile currentUser={currentUser} />
+                        <StatePie data={data} />
+                    </div>
+                }
+                <div>
+                    <AddTag />
                 </div>
-            }
-            <div>
-                <AddTag />
             </div>
         </DashboardContainer>
     );

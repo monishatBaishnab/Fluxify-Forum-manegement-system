@@ -22,3 +22,18 @@
     background-color: #f1f1f1; /* color of the track */
     height: 2px;
 }
+
+#rightTags::-webkit-scrollbar {
+    width: 4px; /* width of the scrollbar */
+    height: 8px;
+}
+  
+#rightTags::-webkit-scrollbar-thumb {
+    background-color: rgb(64, 168, 253); /* color of the thumb */
+    border-radius: 2px; /* rounded corners of the thumb */
+}
+  
+#rightTags::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* color of the track */
+    height: 2px;
+}
