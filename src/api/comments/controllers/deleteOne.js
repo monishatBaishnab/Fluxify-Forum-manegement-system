@@ -1,3 +1,5 @@
+const Comment = require("../../../models/comments");
+
 const deleteOne = async (req, res, next) => {
     try {
         const commentId = req.params.id;

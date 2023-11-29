@@ -14,7 +14,7 @@ router.post('/post-tags', verifyUser, verifyAdmin, async (req, res, next) => {
     }
 })
 
-router.get('/post-tags', verifyUser, async (req, res, next) => {
+router.get('/post-tags', async (req, res, next) => {
     try {
         const result = await PostTag.find();
         res.send(result);
