@@ -66,13 +66,6 @@ const PaymentForm = () => {
             setPaymentLoading(false);
         } else {
             if (paymentIntent?.status === 'succeeded') {
-                // const payment = {
-                //     email: user.email,
-                //     price: price,
-                //     transectionId: paymentIntent?.id,
-                //     date: new Date(),
-                //     status: 'pending'
-                // }
                 try {
                     await axiosSecure.patch(`/users?email=${user?.email}`, { badge: 'Gold' });
                     setPaymentLoading(false);

@@ -4,7 +4,7 @@ import PostCard from './PostCard';
 const PostContainer = ({posts}) => {
 
     return (
-        <div className="space-y-5 my-10">
+        <div className="space-y-5">
 
             {
                 posts.map(post => <PostCard key={post._id} post={post} />)

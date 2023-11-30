@@ -1,6 +1,25 @@
-import { Typography } from "@material-tailwind/react";
+import { Button, Typography } from "@material-tailwind/react";
+import useAuth from "../../hooks/useAuth";
+import useFetchUser from "../../hooks/useFetchUser";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Membership = () => {
+    const { user } = useAuth();
+    const {data} = useFetchUser();
+    const navigate = useNavigate();
+    const handleClick = () => {
+        if(!user){
+            toast.error('Please signin first');
+            return navigate('/signin');
+        }
+        if(data?.badge === 'Gold'){
+            return toast.error('You are already Gold member.');
+        }
+        else{
+            navigate('/dashboard/payment');
+        }
+    }
     return (
         <div className="container py-5 min-h-[calc(100vh_-_85px)] space-y-3">
             <Typography color="blue" className="font-medium text-center" variant="h3">Explore Exclusive Memberships</Typography>
@@ -15,6 +34,7 @@ const Membership = () => {
                     <li>Special Events and Offers</li>
                     <li>Increased Posting Limit</li>
                 </ul>
+                <Button onClick={handleClick} color="blue" className="mt-4">Become a Member</Button>
             </div>
             <div className="space-y-2">
                 <Typography color="blue" className="font-normal" variant="h5">Bronze Membership</Typography>

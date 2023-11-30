@@ -54,7 +54,7 @@ const Details = ({ post, refetch }) => {
         }
     }
 
-    const shareUrl = `https://fluxify-server-mjbc74ixo-monishats-projects.vercel.app/posts/${_id}`
+    const shareUrl = `https://fluxify-72def.firebaseapp.com/posts/${_id}`
 
     return (
         <div className="bg-white p-5 rounded-lg space-y-5">
@@ -63,7 +63,7 @@ const Details = ({ post, refetch }) => {
                 <img className="w-full h-full object-cover" src={image} alt="" />
             </div>
             <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2 my-2">
+                <div className="flex items-center gap-2 flex-wrap my-2">
                     {tags?.map(tag => <Typography key={tag} className="px-2 bg-[#EAEAEA] rounded-sm text-[#808080]" as='span'>{tag}</Typography>)}
                 </div>
                 <Typography as='span' className="text-sm font-normal text-c-gray">{deffDay > 0 ? `${deffDay} days ago` : 'Today'} </Typography>
@@ -72,7 +72,6 @@ const Details = ({ post, refetch }) => {
             <div className="flex items-end md:justify-between flex-wrap gap-2">
                 <PostUser user={user} deffDay={deffDay} />
                 <div className="flex gap-4 flex-wrap">
-                    {/* <Typography as='span' className="flex items-center gap-2 text-[#808080]"><FaRegComments /> {comment}</Typography> */}
                     <Button onClick={handleUpVote} color="blue" size="sm" className="flex items-center gap-2"><AiFillLike className="text-xl" />{upvote?.length > 0 ? upvote?.length : ''}</Button>
                     <Button onClick={handleDownVote} color="amber" size="sm" className="flex items-center gap-2"><AiFillDislike className="text-xl" />{downvote?.length > 0 ? downvote?.length : ''}</Button>
                    

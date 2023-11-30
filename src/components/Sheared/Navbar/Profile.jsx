@@ -42,7 +42,7 @@ const Profile = () => {
                     </Button>
                 </MenuHandler>
                 <MenuList className="p-1">
-                    <MenuItem>
+                    <MenuItem className="cursor-default hover:bg-opacity-0 focus:bg-opacity-0 active:bg-opacity-0">
                         <Typography className="font-normal text-blue-gray-600">{user?.email}</Typography>
                     </MenuItem>
                     <Link to={navigateLocation}>

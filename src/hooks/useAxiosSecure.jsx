@@ -14,6 +14,7 @@ const useAxiosSecure = () => {
         }, async error => {
             if (error?.response?.status === 401 || error?.response?.status === 404) {
                 await signOutUser();
+                console.log('error from axios interseptors.');
                 toast.error('Unauthorize access.');
             }
         })

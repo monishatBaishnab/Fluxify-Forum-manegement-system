@@ -74,7 +74,7 @@ const Home = () => {
                 </div>
                 {isLoading ?
                     <LoadinPost /> :
-                    <PostContainer posts={data?.data} />}
+                    <div className=" my-10"><PostContainer posts={data?.data} /></div>}
                 {
                     data?.count === 0 &&
                     <div className="flex items-center justify-center flex-col">
