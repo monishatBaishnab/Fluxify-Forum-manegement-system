@@ -4,6 +4,19 @@
 
 Fluxify is a dynamic forum management platform that empowers administrators and users alike with a host of robust features and seamless functionalities. Here's a closer look at what sets Fluxify apart:
 
+*Unique Features*
+
+**Thumbnail Image Integration:**
+   - Enhance posts with a thumbnail image feature, allowing users to include assignment-related visuals upon publication. This visual enhancement ensures a more comprehensible understanding of the primary topic, leveraging the power of visual representation.
+
+**Engaging Loading Skeleton:**
+   - Implement an engaging loading skeleton that gracefully appears during the loading period, ensuring a captivating user experience while posts are being retrieved. This feature maintains user engagement and provides a seamless transition between loading phases.
+
+**Tag-based Post Filtering:**
+   - Display tags elegantly on the homepage and implement refined click events, enabling users to effortlessly filter posts based on their preferences. By clicking on specific tags, users can tailor their viewing experience and access content aligned with their interests.
+
+*Key Features*
+
 #### Admin Dashboard:
 - Our intuitive admin dashboard puts the power of site management in your hands. Admins can effortlessly oversee user activity, manage posts, and maintain the overall health of the community.
 #### User Management:
