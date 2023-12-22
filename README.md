@@ -4,6 +4,40 @@
 
 Fluxify is a dynamic forum management platform that empowers administrators and users alike with a host of robust features and seamless functionalities. Here's a closer look at what sets Fluxify apart:
 
+## Local Setup Instructions
+
+### Prerequisites
+
+Make sure you have the following installed on your machine:
+
+- Node.js: [Download and Install Node.js](https://nodejs.org/)
+- npm (Node Package Manager): This is typically installed with Node.js.
+
+### Clone the Repository
+
+```bash
+https://github.com/monishatBaishnab/Fluxify-Forum-manegement-system.git
+```
+
+### Navigate to Project Directory
+
+```bash
+cd Fluxify-Forum-manegement-system
+```
+
+### Install Dependencies with npm
+
+```bash
+npm install
+```
+
+### Run the Development Server
+
+```bash
+npm run dev
+```
+
+
 *Unique Features*
 
 **Thumbnail Image Integration:**

@@ -3,7 +3,7 @@ import useAuth from "./useAuth";
 import toast from "react-hot-toast";
 
 const instance = axios.create({
-    baseURL: 'https://fluxify-server.vercel.app',
+    baseURL: 'http://localhost:5000',
     withCredentials: true
 })
 const useAxiosSecure = () => {
