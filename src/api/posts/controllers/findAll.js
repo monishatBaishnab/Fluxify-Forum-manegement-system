@@ -33,7 +33,7 @@ const findAll = async (req, res, next) => {
         const countResult = await Post.aggregate(countPipeline);
         // Extract the count value from the result
         const count = countResult.length > 0 ? countResult[0].count : 0;
-        
+
         if (!sort || sort === 'undefined' || sort === 'defult') {
             pipeline.push(
                 {
@@ -75,10 +75,18 @@ const findAll = async (req, res, next) => {
             },
             {
                 $unwind: '$user'
+            },
+            {
+                $lookup: {
+                    from: 'comments',
+                    localField: '_id',
+                    foreignField: 'post',
+                    as: 'comments'
+                }
             }
         )
 
-        if (sort === 'popularity')  {
+        if (sort === 'popularity') {
             pipeline.push(
                 {
                     $sort: { voteDifference: -1 }
