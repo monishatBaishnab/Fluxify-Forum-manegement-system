@@ -26,12 +26,12 @@ const tagsData = [
 const Tags = () => {
     return (
         <div className="container py-5 min-h-[calc(100vh_-_85px)] space-y-3">
-            <div className="grid gap-5 grid-cols-1 md:grid-cols-1 lg:grid-cols-3">
+            <div className="grid gap-5 grid-cols-1 sm:grid-cols-2 xl:grid-cols-3">
                 {
                     tagsData?.map(tag => <div key={tag?.desc} className="p-5 bg-white rounded-md space-y-3 border">
                         <div className="flex items-center justify-between">
                             <Typography className="font-normal flex items-center gap-2"><IoMdPricetags /> <span className="px-2 bg-blue-500/20 rounded-sm">{tag?.tag}</span></Typography>
-                            <Typography className="font-normal">Post: {tag?.num_posts}</Typography>
+                            <Typography className="font-normal text-sm">Post: {tag?.num_posts}</Typography>
                         </div>
                         <div>
                             <Typography className="font-normal text-sm">{tag?.desc}</Typography>

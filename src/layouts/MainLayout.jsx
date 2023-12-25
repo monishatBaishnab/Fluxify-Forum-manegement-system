@@ -14,7 +14,7 @@ const MainLayout = () => {
                 <div className="flex-1 bg-[#FAFAFA] mt-[82px]">
                     <Outlet />
                 </div>
-                <div className="w-[280px] hidden lg:inline-block">
+                <div className="w-[280px] hidden 2xl:inline-block">
                     <RightSidebar />
                 </div>
             </div>
