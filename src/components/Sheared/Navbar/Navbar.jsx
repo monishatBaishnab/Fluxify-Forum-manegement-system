@@ -41,8 +41,12 @@ const Navbar = () => {
                     </Badge>
                     {user === null ?
                         <div className="hidden md:flex items-center gap-2">
-                            <Link to='/signin'><Button className="bg-primary flex items-center gap-2 text-base font-normal capitalize py-2"><LuUserPlus className="text-lg" /> Join us</Button></Link>
-                            <Link to='/signup'><Button className="bg-c-blue/20 text-c-blue flex items-center gap-2 text-base font-normal capitalize py-2"><AiOutlineLogin className="text-lg" /> Sign up </Button></Link>
+                            <Link to='/signin'>
+                                <Button className="bg-primary flex items-center gap-2 text-base font-normal capitalize py-2"><LuUserPlus className="text-lg" /> Join us</Button>
+                            </Link>
+                            <Link to='/signup'>
+                                <Button className="bg-c-blue/20 text-c-blue flex items-center gap-2 text-base font-normal capitalize py-2"><AiOutlineLogin className="text-lg" /> Sign up </Button>
+                            </Link>
                         </div>
                         :
                         <Profile />}

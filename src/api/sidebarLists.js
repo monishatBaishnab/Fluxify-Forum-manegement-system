@@ -2,6 +2,7 @@ import { FaHome, FaList, FaRegUser, FaUserShield, FaUsersCog } from "react-icons
 import { MdLibraryAdd } from "react-icons/md";
 import { BiSolidCommentError } from "react-icons/bi";
 import { GrAnnounce } from "react-icons/gr";
+import { PiUsersBold } from "react-icons/pi";
 
 export const usersItems = [
     {
@@ -15,6 +16,12 @@ export const usersItems = [
         level: 'Membership',
         icon: FaUsersCog,
         path: '/membership'
+    },
+    {
+        id: '2',
+        level: 'About us',
+        icon: PiUsersBold,
+        path: '/about-us'
     }
 ]
 

@@ -5,11 +5,9 @@ import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
 import { getDayAgo } from "../../../api/getDays";
 import PostUser from "../../Sheared/Post/PostUser";
-import useFetchCommentsByPostId from "../../../hooks/useFetchCommentsByPostId";
 
 const PostCard = ({ post }) => {
-    const { _id, title, tags, upvote, downvote, user, time, image } = post || {};
-    const { data: comments } = useFetchCommentsByPostId(_id);
+    const { _id, title, tags, upvote, downvote, user, time, image, comments } = post || {};
 
     const deffDay = getDayAgo(time);
 
@@ -29,7 +27,7 @@ const PostCard = ({ post }) => {
                     <div className="flex items-end md:justify-between flex-wrap gap-2">
                         <PostUser user={user} deffDay={deffDay} />
                         <div className="flex gap-4 flex-wrap">
-                            <Typography as='span' className="flex items-center gap-2 text-[#808080]"><FaRegComments /> {comments?.data?.length}</Typography>
+                            <Typography as='span' className="flex items-center gap-2 text-[#808080]"><FaRegComments /> {comments?.length}</Typography>
                             <Typography as='span' className="flex items-center gap-2 text-[#808080]"><AiFillLike /> {upvote?.length > 0 ? upvote?.length : ''}</Typography>
                             <Typography as='span' className="flex items-center gap-2 text-[#808080]"><AiFillDislike /> {downvote?.length > 0 ? downvote?.length : ''}</Typography>
                         </div>

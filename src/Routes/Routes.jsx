@@ -18,6 +18,7 @@ import ReportedComments from "../pages/Dashboard/Admin/ReportedComments";
 import AdminRoute from "./AdminRoute";
 import Payment from "../pages/Dashboard/User/Payment";
 import Membership from "../pages/Membership/Membership";
+import About from "../pages/About/About";
 
 const Routes = createBrowserRouter([
     {
@@ -32,6 +33,10 @@ const Routes = createBrowserRouter([
             {
                 path: 'membership',
                 element: <Membership />
+            },
+            {
+                path: 'about-us',
+                element: <About />
             },
             {
                 path: 'posts/:id',
