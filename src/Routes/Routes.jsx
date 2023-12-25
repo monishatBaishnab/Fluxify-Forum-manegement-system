@@ -19,6 +19,7 @@ import AdminRoute from "./AdminRoute";
 import Payment from "../pages/Dashboard/User/Payment";
 import Membership from "../pages/Membership/Membership";
 import About from "../pages/About/About";
+import Tags from "../pages/Tags/Tags";
 
 const Routes = createBrowserRouter([
     {
@@ -37,6 +38,10 @@ const Routes = createBrowserRouter([
             {
                 path: 'about-us',
                 element: <About />
+            },
+            {
+                path: 'tags',
+                element: <Tags />
             },
             {
                 path: 'posts/:id',

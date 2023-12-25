@@ -3,6 +3,7 @@ import { MdLibraryAdd } from "react-icons/md";
 import { BiSolidCommentError } from "react-icons/bi";
 import { GrAnnounce } from "react-icons/gr";
 import { PiUsersBold } from "react-icons/pi";
+import { TiTags } from "react-icons/ti";
 
 export const usersItems = [
     {
@@ -18,10 +19,16 @@ export const usersItems = [
         path: '/membership'
     },
     {
-        id: '2',
+        id: '3',
         level: 'About us',
         icon: PiUsersBold,
         path: '/about-us'
+    },
+    {
+        id: '4',
+        level: 'Tags',
+        icon: TiTags,
+        path: '/tags'
     }
 ]
 
